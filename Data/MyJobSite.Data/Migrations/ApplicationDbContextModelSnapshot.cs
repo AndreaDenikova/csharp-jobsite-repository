@@ -341,6 +341,38 @@ namespace MyJobSite.Data.Migrations
                     b.ToTable("CompaniesInfo");
                 });
 
+            modelBuilder.Entity("MyJobSite.Data.Models.FavoriteJobPosting", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("JobPostingId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId", "JobPostingId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("JobPostingId");
+
+                    b.ToTable("FavoriteJobPostings");
+                });
+
             modelBuilder.Entity("MyJobSite.Data.Models.JobPosting", b =>
                 {
                     b.Property<string>("Id")
@@ -547,6 +579,21 @@ namespace MyJobSite.Data.Migrations
                     b.HasOne("MyJobSite.Data.Models.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId");
+                });
+
+            modelBuilder.Entity("MyJobSite.Data.Models.FavoriteJobPosting", b =>
+                {
+                    b.HasOne("MyJobSite.Data.Models.JobPosting", "JobPosting")
+                        .WithMany()
+                        .HasForeignKey("JobPostingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MyJobSite.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MyJobSite.Data.Models.JobPosting", b =>

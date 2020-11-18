@@ -36,6 +36,8 @@
 
         public DbSet<JobPosting> JobPostings { get; set; }
 
+        public DbSet<FavoriteJobPosting> FavoriteJobPostings { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -60,6 +62,9 @@
             // For mapping table - Candidates
             builder.Entity<Candidate>()
                 .HasKey(e => new { e.UserId, e.JobPostingId });
+
+            builder.Entity<FavoriteJobPosting>()
+                .HasKey(f => new { f.UserId, f.JobPostingId });
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
