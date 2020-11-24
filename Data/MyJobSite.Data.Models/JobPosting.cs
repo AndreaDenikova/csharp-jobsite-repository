@@ -29,10 +29,10 @@
         [Required]
         public string Requirements { get; set; }
 
-        public virtual Company Company { get; set; }
+        public virtual CompanyInfo CompanyInfo { get; set; }
 
         [Required]
-        public string CompanyId { get; set; }
+        public string CompanyInfoId { get; set; } 
 
         [Required]
         public string Benefits { get; set; }

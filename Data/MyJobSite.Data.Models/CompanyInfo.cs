@@ -14,21 +14,20 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public virtual Company Company { get; set; }
+        public string Name { get; set; }
 
-        public string CompanyId { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+        public string UserId { get; set; }
 
         public string Picture { get; set; }
 
-        [Required]
         public string Logo { get; set; }
 
-        [Required]
         public string Description { get; set; }
 
         public string PhoneNumber { get; set; }
 
-        [Required]
         public string Address { get; set; }
     }
 }

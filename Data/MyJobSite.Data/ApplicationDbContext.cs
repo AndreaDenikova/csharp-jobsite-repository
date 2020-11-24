@@ -28,8 +28,6 @@
 
         public DbSet<UserInfo> UsersInfo { get; set; }
 
-        public DbSet<Company> Companies { get; set; }
-
         public DbSet<CompanyInfo> CompaniesInfo { get; set; }
 
         public DbSet<Candidate> Candidates { get; set; }
