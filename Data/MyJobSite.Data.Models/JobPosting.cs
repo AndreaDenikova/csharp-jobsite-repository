@@ -32,9 +32,13 @@
         public virtual CompanyInfo CompanyInfo { get; set; }
 
         [Required]
-        public string CompanyInfoId { get; set; } 
+        public string CompanyInfoId { get; set; }
 
         [Required]
         public string Benefits { get; set; }
+
+        public virtual JobPostingCategory JobPostingCategory { get; set; }
+
+        public string JobPostingCategoryId { get; set; }
     }
 }

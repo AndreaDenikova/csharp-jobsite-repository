@@ -6,11 +6,10 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using MyJobSite.Data.Common.Models;
-    using MyJobSite.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using MyJobSite.Data.Common.Models;
+    using MyJobSite.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -35,6 +34,8 @@
         public DbSet<JobPosting> JobPostings { get; set; }
 
         public DbSet<FavoriteJobPosting> FavoriteJobPostings { get; set; }
+
+        public DbSet<JobPostingCategory> JobPostingCategories { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
