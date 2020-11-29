@@ -1,9 +1,10 @@
-﻿using MyJobSite.Data.Common.Models;
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace MyJobSite.Data.Models
+﻿namespace MyJobSite.Data.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    using MyJobSite.Data.Common.Models;
+
     public class UserInfo : BaseDeletableModel<string>
     {
         public UserInfo()
@@ -28,6 +29,6 @@ namespace MyJobSite.Data.Models
         public string FirstName { get; set; }
 
         [Required]
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
     }
 }
