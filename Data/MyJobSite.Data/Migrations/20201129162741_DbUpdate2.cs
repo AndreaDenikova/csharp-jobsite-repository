@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace MyJobSite.Data.Migrations
+﻿namespace MyJobSite.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class DbUpdate2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
