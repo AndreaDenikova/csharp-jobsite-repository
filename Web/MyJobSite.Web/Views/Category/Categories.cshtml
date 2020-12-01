@@ -1,0 +1,116 @@
+﻿@model IEnumerable<MyJobSite.Web.ViewModels.ViewModels.Category.CategoryViewModel>
+@{
+    this.ViewData["Title"] = "Categories";
+}
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+    <meta name="description" content="JobBoard - HTML Template" />
+    <meta property="og:title" content="JobBoard - HTML Template" />
+    <meta property="og:description" content="JobBoard - HTML Template" />
+    <meta property="og:image" content="JobBoard - HTML Template" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
+
+    <!-- PAGE TITLE HERE -->
+    <title>JobBoard - HTML Template</title>
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css" href="css/plugins.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/templete.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="css/skin/skin-1.css">
+    <link rel="stylesheet" href="plugins/datepicker/css/bootstrap-datetimepicker.min.css" />
+    <!-- Revolution Slider Css -->
+    <link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="plugins/revolution/revolution/css/navigation.css">
+    <!-- Revolution Navigation Style -->
+</head>
+<body id="bg">
+    <div id="loading-area"></div>
+    <div class="page-wraper">
+
+        <!-- Section Banner END -->
+        <!-- Call To Action -->
+        <div class="section-full job-categories content-inner-2 bg-white" style="background-image:url(../images/pattern/pic1.html);">
+            <div class="container">
+                <div class="section-head d-flex head-counter clearfix">
+                    <div class="mr-auto">
+                        <h2 class="m-b5">Categories</h2>
+                    </div>
+                    <div class="head-counter-bx">
+                        <h2 class="m-b5 counter">@Model.Sum(x => x.JobPostringsCount)</h2>
+                        <h6 class="fw3">Jobs Posted</h6>
+                    </div>
+                </div>
+                <div class="row sp20">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="icon-bx-wraper">
+                                <div class="icon-content">
+                                    <div class="icon-md text-primary m-b20"><i class="ti-location-pin"></i></div>
+                                    <a href="#" class="dez-tilte">@item.Name Developer</a>
+                                    <p class="m-a0">@item.JobPostringsCount Open Positions</p>
+                                    <div class="rotate-icon"><i class="ti-location-pin"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <!-- Footer END -->
+    <!-- scroll top button -->
+    <button class="scroltop fa fa-arrow-up"></button>
+    </div>
+    <!-- JAVASCRIPT FILES ========================================= -->
+    <script src="/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
+    <script src="/plugins/wow/wow.js"></script><!-- WOW JS -->
+    <script src="/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="/plugins/bootstrap-select/bootstrap-select.min.js"></script><!-- FORM JS -->
+    <script src="/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+    <script src="/plugins/magnific-popup/magnific-popup.js"></script><!-- MAGNIFIC POPUP JS -->
+    <script src="/plugins/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
+    <script src="/plugins/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
+    <script src="/plugins/imagesloaded/imagesloaded.js"></script><!-- IMAGESLOADED -->
+    <script src="/plugins/masonry/masonry-3.1.4.js"></script><!-- MASONRY -->
+    <script src="/plugins/masonry/masonry.filter.js"></script><!-- MASONRY -->
+    <script src="/plugins/owl-carousel/owl.carousel.js"></script><!-- OWL SLIDER -->
+    <script src="/plugins/rangeslider/rangeslider.js"></script><!-- Rangeslider -->
+    <script src="/js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+    <script src="/js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS  -->
+    <script src='/js/recaptcha/api.js'></script> <!-- Google API For Recaptcha  -->
+    <script src="/js/dz.ajax.js"></script><!-- CONTACT JS  -->
+    <script src="/plugins/paroller/skrollr.min.js"></script><!-- PAROLLER -->
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+</body>
+
+</html>

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyJobSite.Web.ViewModels.InputModels
+﻿namespace MyJobSite.Web.ViewModels.InputModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class LogInInputModel
     {
         public string Email { get; set; }

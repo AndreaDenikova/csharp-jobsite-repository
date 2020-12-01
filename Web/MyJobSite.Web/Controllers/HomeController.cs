@@ -3,10 +3,12 @@
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
+    using MyJobSite.Data;
     using MyJobSite.Web.ViewModels;
 
     public class HomeController : BaseController
     {
+
         public IActionResult Contact()
         {
             return this.View();
