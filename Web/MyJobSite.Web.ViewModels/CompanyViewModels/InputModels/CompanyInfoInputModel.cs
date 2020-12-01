@@ -8,8 +8,6 @@
     {
         public string CompanyName { get; set; }
 
-        public string Picture { get; set; }
-
         public string Logo { get; set; }
 
         public string Description { get; set; }

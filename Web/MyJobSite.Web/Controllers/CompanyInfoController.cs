@@ -7,26 +7,20 @@
 
     using Microsoft.AspNetCore.Mvc;
     using MyJobSite.Data;
+    using MyJobSite.Web.ViewModels.InputModels;
 
     public class CompanyInfoController : BaseController
     {
-        private readonly ApplicationDbContext db;
-
-        public CompanyInfoController(ApplicationDbContext db)
-        {
-            this.db = db;
-        }
-
         [HttpGet]
         public IActionResult CompanyInfo()
         {
             return this.View();
         }
 
-        //[HttpPost]
-        //public IActionResult CompanyInfo()
-        //{
-        //    return this.View();
-        //}
+        [HttpPost]
+        public IActionResult CompanyInfo(CompanyInfoInputModel input)
+        {
+            return this.View();
+        }
     }
 }

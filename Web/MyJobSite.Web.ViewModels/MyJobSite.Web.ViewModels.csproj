@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Services\MyJobSite.Services.Mapping\MyJobSite.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CompanyViewModels\ViewModels\" />
+  </ItemGroup>
+
 </Project>
