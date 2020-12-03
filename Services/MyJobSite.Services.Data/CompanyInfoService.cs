@@ -8,6 +8,7 @@
 
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+    using Microsoft.AspNetCore.Identity;
     using MyJobSite.Data.Common.Repositories;
     using MyJobSite.Data.Models;
     using MyJobSite.Web.ViewModels.InputModels;
@@ -15,6 +16,7 @@
     public class CompanyInfoService : ICompanyInfoService
     {
         private readonly IDeletableEntityRepository<CompanyInfo> companyInfoRepository;
+        private readonly UserManager<ApplicationUser> user;
 
         public CompanyInfoService(IDeletableEntityRepository<CompanyInfo> companyInfoRepository)
         {
