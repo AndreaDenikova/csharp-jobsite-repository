@@ -48,16 +48,6 @@
         public class InputModel
         {
             [Required]
-            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            [Display(Name = "FirstName")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            [Display(Name = "LastName")]
-            public string LastName { get; set; }
-
-            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -114,6 +104,10 @@
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        if (this.Input.AccountType == "Company")
+                        {
+                            return Redirect("/CompanyInfo/CompanyInfo");
+                        }
                         return LocalRedirect(returnUrl);
                     }
                 }

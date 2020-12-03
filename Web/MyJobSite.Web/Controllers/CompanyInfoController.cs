@@ -7,10 +7,18 @@
 
     using Microsoft.AspNetCore.Mvc;
     using MyJobSite.Data;
+    using MyJobSite.Services.Data;
     using MyJobSite.Web.ViewModels.InputModels;
 
     public class CompanyInfoController : BaseController
     {
+        private readonly ICompanyInfoService companyInfoService;
+
+        public CompanyInfoController(ICompanyInfoService companyInfoService)
+        {
+            this.companyInfoService = companyInfoService;
+        }
+
         [HttpGet]
         public IActionResult CompanyInfo()
         {
@@ -18,9 +26,15 @@
         }
 
         [HttpPost]
-        public IActionResult CompanyInfo(CompanyInfoInputModel input)
+        public async Task<IActionResult> CompanyInfo(CompanyInfoInputModel input)
         {
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            await this.companyInfoService.PostCompanyInfoAsync(input);
+            return this.Redirect("/");
         }
     }
 }
