@@ -13,7 +13,6 @@
         [MinLength(3)]
         public string Name { get; set; }
 
-        [Required]
         public string UserId { get; set; }
 
         public IFormFile Logo { get; set; }

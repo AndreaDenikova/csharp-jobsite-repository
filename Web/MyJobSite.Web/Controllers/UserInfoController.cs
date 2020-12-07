@@ -4,34 +4,33 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using MyJobSite.Data;
     using MyJobSite.Data.Models;
     using MyJobSite.Services.Data;
     using MyJobSite.Web.ViewModels.InputModels;
 
-    public class CompanyInfoController : BaseController
+    public class UserInfoController : BaseController
     {
-        private readonly ICompanyInfoService companyInfoService;
+        private readonly IUserInfoService userInfoService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public CompanyInfoController(ICompanyInfoService companyInfoService, UserManager<ApplicationUser> userManager)
+        public UserInfoController(IUserInfoService userInfoService, UserManager<ApplicationUser> userManager)
         {
-            this.companyInfoService = companyInfoService;
+            this.userInfoService = userInfoService;
             this.userManager = userManager;
         }
 
-        [HttpGet]
-        public IActionResult CompanyInfo()
+        public IActionResult UserInfo()
         {
             return this.View();
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CompanyInfo(CompanyInfoInputModel input)
+        public async Task<IActionResult> UserInfo(UserInfoInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -40,7 +39,7 @@
 
             input.UserId = this.userManager.GetUserId(this.User);
 
-            await this.companyInfoService.PostCompanyInfoAsync(input);
+            await this.userInfoService.PostUserInfoAsync(input);
             return this.Redirect("/");
         }
     }

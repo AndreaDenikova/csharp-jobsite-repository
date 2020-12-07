@@ -5,12 +5,13 @@
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
+
     using MyJobSite.Web.ViewModels.InputModels;
 
-    public interface ICompanyInfoService
+    public interface IUserInfoService
     {
         string UploadImageToCloudinary(Stream imageFileStream);
 
-        Task PostCompanyInfoAsync(CompanyInfoInputModel input);
+        Task PostUserInfoAsync(UserInfoInputModel input);
     }
 }
