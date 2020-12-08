@@ -13,16 +13,18 @@
 
     public class CandidateProfileService : ICandidateProfileService
     {
-        private readonly IDeletableEntityRepository<UserInfo> repository;
+        private readonly IDeletableEntityRepository<UserInfo> userInfoRepository;
 
-        public CandidateProfileService(IDeletableEntityRepository<UserInfo> repository)
+        public CandidateProfileService(IDeletableEntityRepository<UserInfo> userInfoRepository)
         {
-            this.repository = repository;
+            this.userInfoRepository = userInfoRepository;
         }
 
         public T GetCandidateProfileInformation<T>(string id)
         {
-            return this.repository.All().Where(u => u.UserId == id).To<T>().FirstOrDefault();
+            var userInfo = this.userInfoRepository.All().Where(u => u.UserId == id).To<T>().FirstOrDefault();
+
+            return userInfo;
         }
     }
 }

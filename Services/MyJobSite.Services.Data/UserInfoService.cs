@@ -31,6 +31,8 @@
                 Description = input.Description,
                 ProfilePicture = this.UploadImageToCloudinary(input.ProfilePicture.OpenReadStream()),
                 CV = this.UploadCvFileToCloudinary(input.Cv.OpenReadStream()),
+                Address = input.Address,
+                City = input.City,
             };
 
             await this.userInfoRepository.AddAsync(userInfo);
@@ -65,20 +67,11 @@
             };
 
             Cloudinary cloudinary = new Cloudinary(account);
-            var uploadParams = new ImageUploadParams()
+            var uploadParams = new RawUploadParams()
             {
-                File = new FileDescription("thrumbnail.pdf", cvFileStream),
+                File = new FileDescription("thrumbnail", cvFileStream),
             };
-
-            var getResource = new GetResourceParams("sample_pdf")
-            {
-                Pages = true,
-            };
-
             var uploadResult = cloudinary.Upload(uploadParams);
-
-            var info = cloudinary.GetResource(getResource);
-
             return uploadResult.SecureUri.AbsoluteUri;
         }
     }

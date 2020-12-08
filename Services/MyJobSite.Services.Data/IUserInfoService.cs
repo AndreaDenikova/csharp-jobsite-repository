@@ -12,6 +12,8 @@
     {
         string UploadImageToCloudinary(Stream imageFileStream);
 
+        string UploadCvFileToCloudinary(Stream imageFileStream);
+
         Task PostUserInfoAsync(UserInfoInputModel input);
     }
 }

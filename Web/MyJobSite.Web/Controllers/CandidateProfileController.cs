@@ -23,10 +23,14 @@
         }
 
         [Authorize]
-        public IActionResult CandidateProfile()
+        public async Task<IActionResult> CandidateProfile()
         {
             var userId = this.userManager.GetUserId(this.User);
+
             var viewModel = this.candidateProfileService.GetCandidateProfileInformation<CandidateProfileViewModel>(userId);
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userEmail = await this.userManager.GetEmailAsync(user);
+            viewModel.Email = userEmail;
             return this.View(viewModel);
         }
     }

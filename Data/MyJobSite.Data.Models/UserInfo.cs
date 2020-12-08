@@ -15,7 +15,7 @@
         public virtual ApplicationUser User { get; set; }
 
         public string UserId { get; set; }
-        
+
         public string Description { get; set; }
 
         [Required]
@@ -29,5 +29,10 @@
 
         [Required]
         public string LastName { get; set; }
+
+        public string Address { get; set; }
+
+        [Required]
+        public string City { get; set; }
     }
 }
