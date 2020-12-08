@@ -16,7 +16,6 @@
     public class CompanyInfoService : ICompanyInfoService
     {
         private readonly IDeletableEntityRepository<CompanyInfo> companyInfoRepository;
-        private readonly UserManager<ApplicationUser> user;
 
         public CompanyInfoService(IDeletableEntityRepository<CompanyInfo> companyInfoRepository)
         {
@@ -32,6 +31,7 @@
                 Logo = this.UploadImageToCloudinary(input.Logo.OpenReadStream()),
                 Description = input.Description,
                 Address = input.Address,
+                PhoneNumber = input.PhoneNumber,
             };
             await this.companyInfoRepository.AddAsync(companyInfo);
             await this.companyInfoRepository.SaveChangesAsync();

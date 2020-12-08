@@ -1,4 +1,5 @@
 ﻿@using MyJobSite.Common
+@inject MyJobSite.Services.Data.IAccountTypeService accountTypeSerice
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +33,10 @@
                     <!-- extra nav -->
                     <div class="extra-nav">
                         <div class="extra-cell">
-                            <a  asp-area="Identity" asp-page="/Account/Register" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
-                            <a  asp-area="Identity" asp-page="/Account/Login" class="site-button"><i class="fa fa-lock"></i> login</a>
+
+                            <a asp-area="Identity" asp-page="/Account/Register" class="site-button"><i class="fa fa-user"></i> SignUp</a>
+                            <a asp-area="Identity" asp-page="/Account/Login" class="site-button"><i class="fa fa-lock"></i> LogIn</a>
+
                         </div>
                     </div>
                     <!-- Quik search -->
@@ -49,18 +52,35 @@
                             <li class="active">
                                 <a href="#">Home</a>
                             </li>
-                            <li>
-                                <a asp-controller="Category" asp-action="Categories">Categories</a>
-                            </li>
-                            <li>
-                                <a href="#">New Job Posting</a>
-                            </li>
-                            <li>
-                                <a href="#">Job Postings</a>
-                            </li>
-                            <li>
-                                <a href="#">Candidacies</a>
-                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <a asp-controller="Category" asp-action="Categories"> Categories</a>
+                                </li>
+                            }
+
+                            @if (User.Identity.IsAuthenticated && accountTypeSerice.GetAccoutType(User) == "Candidate")
+                            {
+                                <li>
+                                    <a asp-controller="CandidateProfile" asp-action="CandidateProfile"> Profile</a>
+                                </li>
+                            }
+                            else if (User.Identity.IsAuthenticated && accountTypeSerice.GetAccoutType(User) == "Company")
+                            {
+                                <li>
+                                    <a asp-controller="CompanyProfile" asp-action="CompanyProfile"> Profile</a>
+                                </li>
+                            }
+
+                            @*<li>
+            <a href="#">New Job Posting</a>
+        </li>*@
+                            @*<li>
+            <a href="#">Job Postings</a>
+        </li>*@
+                            @*<li>
+            <a href="#">Candidates</a>
+        </li>*@
                         </ul>
                     </div>
                 </div>

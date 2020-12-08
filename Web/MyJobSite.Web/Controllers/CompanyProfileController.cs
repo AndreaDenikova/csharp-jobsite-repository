@@ -12,23 +12,23 @@
     using MyJobSite.Services.Data;
     using MyJobSite.Web.ViewModels.ViewModels;
 
-    public class CandidateProfileController : BaseController
+    public class CompanyProfileController : BaseController
     {
-        private readonly ICandidateProfileService candidateProfileService;
+        private readonly ICompanyProfileService companyProfileService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public CandidateProfileController(ICandidateProfileService candidateProfileService, UserManager<ApplicationUser> userManager)
+        public CompanyProfileController(ICompanyProfileService companyProfileService, UserManager<ApplicationUser> userManager)
         {
-            this.candidateProfileService = candidateProfileService;
+            this.companyProfileService = companyProfileService;
             this.userManager = userManager;
         }
 
         [Authorize]
-        public async Task<IActionResult> CandidateProfile()
+        public async Task<IActionResult> CompanyProfile()
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var viewModel = this.candidateProfileService.GetCandidateProfileInformation<CandidateProfileViewModel>(userId);
+            var viewModel = this.companyProfileService.GetCompanyProfileInformation<CompanyProfileViewModel>(userId);
             var user = await this.userManager.GetUserAsync(this.User);
             var userEmail = await this.userManager.GetEmailAsync(user);
             viewModel.Email = userEmail;
