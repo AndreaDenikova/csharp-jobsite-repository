@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyJobSite.Data;
 
 namespace MyJobSite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201210101837_DbUpdate7")]
+    partial class DbUpdate7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,12 +374,6 @@ namespace MyJobSite.Data.Migrations
 
                     b.Property<string>("JobPostingCategoryId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("MaxSalary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("MinSalary")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");

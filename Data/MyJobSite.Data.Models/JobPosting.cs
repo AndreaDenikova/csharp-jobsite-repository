@@ -40,5 +40,11 @@
         public virtual JobPostingCategory JobPostingCategory { get; set; }
 
         public string JobPostingCategoryId { get; set; }
+
+        public string Instructions { get; set; }
+
+        public decimal MinSalary { get; set; }
+
+        public decimal MaxSalary { get; set; }
     }
 }

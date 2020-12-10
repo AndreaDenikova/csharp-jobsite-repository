@@ -13,7 +13,7 @@
 
         [Required]
         [MinLength(3)]
-        public string Address { get; set; }
+        public string Location { get; set; }
 
         [Required]
         [MinLength(20)]
@@ -28,12 +28,21 @@
         public string Benefits { get; set; }
 
         [Required]
-        public string JobPostingCategory { get; set; }
+        public string Category { get; set; }
 
         [Required]
         public string JobPostingCategoryId { get; set; }
 
         [Required]
         public string CompanyInfoId { get; set; }
+
+        [Required]
+        public string VacancyType { get; set; }
+
+        public string Instructions { get; set; }
+
+        public decimal MinSalary { get; set; }
+
+        public decimal MaxSalary { get; set; }
     }
 }
