@@ -9,6 +9,6 @@
 
     public interface IJobPostingsService
     {
-        Task PostCompanyInfoAsync(JobPostingInputModel input);
+        Task PostJobPostingAsync(JobPostingInputModel input);
     }
 }

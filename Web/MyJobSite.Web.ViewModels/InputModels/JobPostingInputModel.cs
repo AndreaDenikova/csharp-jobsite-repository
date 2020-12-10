@@ -21,6 +21,14 @@
 
         [Required]
         [MinLength(20)]
+        public string Skills { get; set; }
+
+        [Required]
+        [MinLength(20)]
+        public string Responsibilities { get; set; }
+
+        [Required]
+        [MinLength(20)]
         public string Description { get; set; }
 
         [Required]
@@ -30,10 +38,8 @@
         [Required]
         public string Category { get; set; }
 
-        [Required]
         public string JobPostingCategoryId { get; set; }
 
-        [Required]
         public string CompanyInfoId { get; set; }
 
         [Required]

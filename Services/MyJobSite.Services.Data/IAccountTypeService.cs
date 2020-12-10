@@ -9,5 +9,7 @@
     public interface IAccountTypeService
     {
         string GetAccoutType(ClaimsPrincipal claimsPrincipal);
+
+        string GetAccountTypeController(string userId);
     }
 }

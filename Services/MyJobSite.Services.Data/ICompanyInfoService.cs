@@ -12,5 +12,7 @@
         string UploadImageToCloudinary(Stream imageFileStream);
 
         Task PostCompanyInfoAsync(CompanyInfoInputModel input);
+
+        string GetCompanyInfoId(string userId);
     }
 }

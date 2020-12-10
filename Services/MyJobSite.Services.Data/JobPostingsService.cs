@@ -21,17 +21,23 @@
             this.jobRepository = jobRepository;
         }
 
-        public async Task PostCompanyInfoAsync(JobPostingInputModel input)
+        public async Task PostJobPostingAsync(JobPostingInputModel input)
         {
             var jobPosting = new JobPosting
             {
                 Title = input.JobTitle,
                 Address = input.Location,
                 Requirements = input.Requirements,
+                Skills = input.Skills,
+                Responsibilities = input.Responsibilities,
+                Description = input.Description,
+                Benefits = input.Benefits,
                 Type = input.VacancyType,
-                JobPostingCategoryId = input.Category,
+                JobPostingCategoryId = input.JobPostingCategoryId,
                 Instructions = input.Instructions,
                 CompanyInfoId = input.CompanyInfoId,
+                MinSalary = input.MinSalary,
+                MaxSalary = input.MaxSalary,
             };
 
             //// TODO: Insert Logo in JobPosting

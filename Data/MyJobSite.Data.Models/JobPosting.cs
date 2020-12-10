@@ -29,6 +29,12 @@
         [Required]
         public string Requirements { get; set; }
 
+        [Required]
+        public string Responsibilities { get; set; }
+
+        [Required]
+        public string Skills { get; set; }
+
         public virtual CompanyInfo CompanyInfo { get; set; }
 
         [Required]

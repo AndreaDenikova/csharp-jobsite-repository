@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -20,6 +21,14 @@
         public CompanyInfoService(IDeletableEntityRepository<CompanyInfo> companyInfoRepository)
         {
             this.companyInfoRepository = companyInfoRepository;
+        }
+
+        public string GetCompanyInfoId(string userId)
+        {
+            var user = this.companyInfoRepository.All().Where(c => c.UserId == userId).FirstOrDefault();
+            var companyInfoId = user.Id;
+
+            return companyInfoId;
         }
 
         public async Task PostCompanyInfoAsync(CompanyInfoInputModel input)

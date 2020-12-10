@@ -54,13 +54,13 @@
             <div class="dez-bnr-inr overlay-black-middle bg-pt" style="background-image:url(/images/banner/bnr2.jpg);">
                 <div class="container">
                     <div class="dez-bnr-inr-entry">
-                        <h1 class="text-white">Company Information</h1>
+                        <h1 class="text-white">New Job Posting</h1>
                         <!-- Breadcrumb row -->
                         <div class="breadcrumb-row">
-                            <ul class="list-inline">
+                            @*<ul class="list-inline">
                                 <li><a href="#">Register</a></li>
                                 <li>Additional Information</li>
-                            </ul>
+                            </ul>*@
                         </div>
                         <!-- Breadcrumb row END -->
                     </div>
@@ -73,14 +73,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <h3 class="font-weight-700 m-t0 m-b20">Add Information About The Company</h3>
+                            <h3 class="font-weight-700 m-t0 m-b20">Add Information About The Position</h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 m-b30">
                             <div class="p-a30 border-1  max-w500 m-auto">
                                 <div class="tab-content">
-                                    <form form id="company_info" class="tab-pane active" method="post" enctype="multipart/form-data">
+                                    <form id="job_posting" class="tab-pane active" method="post" enctype="multipart/form-data">
                                         <div class="note">
                                             <small id="formHelp" class="form-text text-muted">Everything marked with "*" is requiured.</small>
                                         </div>
@@ -90,9 +90,9 @@
                                             <span asp-validation-for="JobTitle" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label asp-for="Address">Address *</label>
-                                            <input asp-for="Address" type="file" class="form-control" id="job_address" placeholder="Insert the address of the job">
-                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                            <label asp-for="Location">Location *</label>
+                                            <input asp-for="Location" type="text" class="form-control" id="job_location" placeholder="Insert the location of the job">
+                                            <span asp-validation-for="Location" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Description">Description *</label>
@@ -101,20 +101,59 @@
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Requirements">Requirements *</label>
-                                            <input asp-for="Requirements" type="text" class="form-control" id="description" placeholder="Write the requirments for the position">
+                                            <textarea asp-for="Requirements" type="text" class="form-control" id="description" placeholder="Write the requirments for the position"></textarea>
                                             <span asp-validation-for="Requirements" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
+                                            <label asp-for="Responsibilities">Responsibilities *</label>
+                                            <textarea asp-for="Responsibilities" type="text" class="form-control" id="responsibilities" placeholder="Write the responsibilities of the position"></textarea>
+                                            <span asp-validation-for="Responsibilities" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Skills">Skills *</label>
+                                            <textarea asp-for="Skills" type="text" class="form-control" id="skills" placeholder="Write the Skills needed for the position"></textarea>
+                                            <span asp-validation-for="Skills" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
                                             <label asp-for="Benefits">Benefits *</label>
-                                            <input asp-for="Benefits" type="text" class="form-control" id="address" placeholder="Write the benefits of the position">
+                                            <textarea asp-for="Benefits" type="text" class="form-control" id="address" placeholder="Write the benefits of the position"></textarea>
                                             <span asp-validation-for="Benefits" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Choose Account Type *</label>
-                                            <select asp-for="JobPostingCategory" class="form-control" id="category">
-                                                <option value="Candidate">JobCandidate</option>
-                                                <option value="Company">Company</option>
+                                            <label for="exampleFormControlSelect1">Choose Job Category *</label>
+                                            <select asp-for="Category" class="form-control" id="category">
+                                                <option value="Back-end">Back-end</option>
+                                                <option value="Web">Web</option>
+                                                <option value="Desktop">Desktop</option>
+                                                <option value="Mobile">Mobile</option>
+                                                <option value="Graphics">Graphics</option>
+                                                <option value="Game">Game</option>
+                                                <option value="Front-end">Front-end</option>
+                                                <option value="Full-stack">Full-stack</option>
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">Choose Job Vacancy Type *</label>
+                                            <select asp-for="VacancyType" class="form-control" id="vacancy_type">
+                                                <option value="Full-time">Full-time</option>
+                                                <option value="Part-time">Part-time</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="MinSalary">Salary Range(Not required)</label>
+                                            <hr>
+                                            <label asp-for="MinSalary">Min Salary:</label>
+                                            <input value="0" asp-for="MinSalary" type="number" class="form-control" id="min_salary" placeholder="">
+                                            <label asp-for="MaxSalary">Max Salary:</label>
+                                            <span asp-validation-for="MinSalary" class="text-danger"></span>
+                                            <input value="0" asp-for="MaxSalary" type="number" class="form-control" id="max_salary" placeholder="">
+                                            <span asp-validation-for="MaxSalary" class="text-danger"></span>
+                                            <hr>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Instructions">To Apply</label>
+                                            <input asp-for="Instructions" type="text" class="form-control" id="job_location" placeholder="Instructions for application">
+                                            <span asp-validation-for="Instructions" class="text-danger"></span>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Create</button>
                                     </form>

@@ -7,5 +7,7 @@
     public interface ICategoriesService
     {
         IEnumerable<T> GetCategories<T>();
+
+        public string GetCategoryId(string categoryName);
     }
 }

@@ -69,6 +69,7 @@
             services.AddTransient<ICandidateProfileService, CandidateProfileService>();
             services.AddTransient<ICompanyProfileService, CompanyProfileService>();
             services.AddTransient<IAccountTypeService, AccountTypeService>();
+            services.AddTransient<IJobPostingsService, JobPostingsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
