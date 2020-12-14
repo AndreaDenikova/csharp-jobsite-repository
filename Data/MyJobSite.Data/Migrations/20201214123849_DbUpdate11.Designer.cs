@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyJobSite.Data;
 
 namespace MyJobSite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201214123849_DbUpdate11")]
+    partial class DbUpdate11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -350,6 +352,9 @@ namespace MyJobSite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("CompanyInfoId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -403,6 +408,8 @@ namespace MyJobSite.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("CompanyInfoId");
 
@@ -617,6 +624,10 @@ namespace MyJobSite.Data.Migrations
 
             modelBuilder.Entity("MyJobSite.Data.Models.JobPosting", b =>
                 {
+                    b.HasOne("MyJobSite.Data.Models.JobPostingCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
                     b.HasOne("MyJobSite.Data.Models.CompanyInfo", "CompanyInfo")
                         .WithMany()
                         .HasForeignKey("CompanyInfoId")

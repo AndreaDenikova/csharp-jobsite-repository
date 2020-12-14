@@ -14,5 +14,9 @@
         Task PostCompanyInfoAsync(CompanyInfoInputModel input);
 
         string GetCompanyInfoId(string userId);
+
+        string GetCompanyLogo(string userId);
+
+        string GetCompanyName(string userId);
     }
 }

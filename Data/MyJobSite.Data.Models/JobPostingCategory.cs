@@ -9,7 +9,5 @@
     public class JobPostingCategory : BaseDeletableModel<string>
     {
         public string Name { get; set; }
-
-        public ICollection<JobPosting> JobPostings { get; set; }
     }
 }

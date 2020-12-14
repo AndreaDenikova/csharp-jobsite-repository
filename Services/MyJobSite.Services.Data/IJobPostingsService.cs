@@ -10,5 +10,9 @@
     public interface IJobPostingsService
     {
         Task PostJobPostingAsync(JobPostingInputModel input);
+
+        T GetJobPostingInformation<T>(string id);
+
+        string GetJobPostingId(string id);
     }
 }

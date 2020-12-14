@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@
     using CloudinaryDotNet.Actions;
     using MyJobSite.Data.Common.Repositories;
     using MyJobSite.Data.Models;
+    using MyJobSite.Services.Mapping;
     using MyJobSite.Web.ViewModels.InputModels;
 
     public class JobPostingsService : IJobPostingsService
@@ -19,6 +21,21 @@
         public JobPostingsService(IDeletableEntityRepository<JobPosting> jobRepository)
         {
             this.jobRepository = jobRepository;
+        }
+
+        public T GetJobPostingInformation<T>(string id)
+        {
+            var jobPosting = this.jobRepository.All().Where(j => j.Id == id).To<T>().FirstOrDefault();
+
+            return jobPosting;
+        }
+
+        public string GetJobPostingId(string companyInfoId)
+        {
+            var jobPosting = this.jobRepository.All().Where(j => j.CompanyInfoId == companyInfoId).FirstOrDefault();
+            var id = jobPosting.CompanyInfoId;
+
+            return id;
         }
 
         public async Task PostJobPostingAsync(JobPostingInputModel input)

@@ -4,12 +4,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using MyJobSite.Data.Models;
     using MyJobSite.Services.Data;
     using MyJobSite.Web.ViewModels.InputModels;
+    using MyJobSite.Web.ViewModels.ViewModels.JobPosting;
 
     public class JobPostingsController : BaseController
     {
@@ -45,6 +47,13 @@
                 this.Redirect("/");
             }
 
+            if (input.MinSalary != 0 && input.MaxSalary != 0 && input.MinSalary >= input.MaxSalary)
+            {
+                return this.RedirectToAction("JobPostings");
+            }
+
+            //// TODO: Fix the check
+
             if (!this.ModelState.IsValid)
             {
                 return this.View();
@@ -58,6 +67,21 @@
 
             await this.jobPostingService.PostJobPostingAsync(input);
             return this.Redirect("/");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetJobPosting(string id)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var logo = this.companyInfoService.GetCompanyLogo(userId);
+            var companyName = this.companyInfoService.GetCompanyName(userId);
+
+            var viewModel = this.jobPostingService.GetJobPostingInformation<JobPostingViewModel>(id);
+            viewModel.Logo = logo;
+            viewModel.CompanyName = companyName;
+
+            return this.View(viewModel);
         }
     }
 }
