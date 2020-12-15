@@ -45,6 +45,12 @@
         [Required]
         public string VacancyType { get; set; }
 
+        [Required]
+        public string CityId { get; set; }
+
+        [Required]
+        public string CityName { get; set; }
+
         public string Instructions { get; set; }
 
         public decimal MinSalary { get; set; }

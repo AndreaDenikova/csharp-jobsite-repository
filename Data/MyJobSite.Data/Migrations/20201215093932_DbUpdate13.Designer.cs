@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyJobSite.Data;
 
 namespace MyJobSite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201215093932_DbUpdate13")]
+    partial class DbUpdate13
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,33 +263,6 @@ namespace MyJobSite.Data.Migrations
                     b.ToTable("Candidates");
                 });
 
-            modelBuilder.Entity("MyJobSite.Data.Models.City", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Cities");
-                });
-
             modelBuilder.Entity("MyJobSite.Data.Models.CompanyInfo", b =>
                 {
                     b.Property<string>("Id")
@@ -377,9 +352,9 @@ namespace MyJobSite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CityId")
+                    b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyInfoId")
                         .IsRequired()
@@ -434,8 +409,6 @@ namespace MyJobSite.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("CompanyInfoId");
 
@@ -650,12 +623,6 @@ namespace MyJobSite.Data.Migrations
 
             modelBuilder.Entity("MyJobSite.Data.Models.JobPosting", b =>
                 {
-                    b.HasOne("MyJobSite.Data.Models.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("MyJobSite.Data.Models.CompanyInfo", "CompanyInfo")
                         .WithMany()
                         .HasForeignKey("CompanyInfoId")

@@ -25,6 +25,21 @@
             return this.repository.All().To<T>().ToList();
         }
 
+        public ICollection<string> GetCategoriesNames()
+        {
+            var categories = this.jobPostingCategoryRepository.All().OrderBy(c => c.Name);
+
+            var listOfNames = new List<string>();
+
+            foreach (var category in categories)
+            {
+                var nameOfCategory = category.Name;
+                listOfNames.Add(nameOfCategory);
+            }
+
+            return listOfNames;
+        }
+
         public string GetCategoryId(string categoryName)
         {
             var category = this.jobPostingCategoryRepository.All().Where(c => c.Name == categoryName).FirstOrDefault();

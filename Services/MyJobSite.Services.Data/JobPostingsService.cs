@@ -55,6 +55,7 @@
                 CompanyInfoId = input.CompanyInfoId,
                 MinSalary = input.MinSalary,
                 MaxSalary = input.MaxSalary,
+                CityId = input.CityId,
             };
 
             //// TODO: Insert Logo in JobPosting

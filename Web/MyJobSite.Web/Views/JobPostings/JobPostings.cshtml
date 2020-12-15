@@ -1,4 +1,6 @@
 ﻿@*@page*@
+@inject MyJobSite.Services.Data.ICitiesService citiesService
+@inject MyJobSite.Services.Data.ICategoriesService categoriesService
 @model MyJobSite.Web.ViewModels.InputModels.JobPostingInputModel
 @{
     ViewData["Title"] = "JobPostings";
@@ -58,9 +60,9 @@
                         <!-- Breadcrumb row -->
                         <div class="breadcrumb-row">
                             @*<ul class="list-inline">
-                                <li><a href="#">Register</a></li>
-                                <li>Additional Information</li>
-                            </ul>*@
+                                    <li><a href="#">Register</a></li>
+                                    <li>Additional Information</li>
+                                </ul>*@
                         </div>
                         <!-- Breadcrumb row END -->
                     </div>
@@ -88,6 +90,15 @@
                                             <label asp-for="JobTitle">Title *</label>
                                             <input asp-for="JobTitle" type="text" class="form-control" id="job_title" aria-describedby="emailHelp" placeholder="Enter the title of the job posting">
                                             <span asp-validation-for="JobTitle" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">City *</label>
+                                            <select asp-for="CityName" class="form-control" id="category">
+                                                @foreach (var city in @citiesService.GetCities())
+                                                {
+                                                    <option value="@city">@city</option>
+                                                }
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Location">Location *</label>
@@ -122,14 +133,10 @@
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">Choose Job Category *</label>
                                             <select asp-for="Category" class="form-control" id="category">
-                                                <option value="Back-end">Back-end</option>
-                                                <option value="Web">Web</option>
-                                                <option value="Desktop">Desktop</option>
-                                                <option value="Mobile">Mobile</option>
-                                                <option value="Graphics">Graphics</option>
-                                                <option value="Game">Game</option>
-                                                <option value="Front-end">Front-end</option>
-                                                <option value="Full-stack">Full-stack</option>
+                                                @foreach (var categoryName in @categoriesService.GetCategoriesNames())
+                                                {
+                                                    <option value="@categoryName">@categoryName</option>
+                                                }
                                             </select>
                                         </div>
                                         <div class="form-group">

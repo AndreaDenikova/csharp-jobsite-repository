@@ -9,5 +9,7 @@
         IEnumerable<T> GetCategories<T>();
 
         public string GetCategoryId(string categoryName);
+
+        ICollection<string> GetCategoriesNames();
     }
 }

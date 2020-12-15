@@ -20,14 +20,16 @@
         private readonly IAccountTypeService accountTypeService;
         private readonly ICategoriesService categoriesService;
         private readonly ICompanyInfoService companyInfoService;
+        private readonly ICitiesService citiesService;
 
-        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService)
+        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService)
         {
             this.jobPostingService = jobPostingService;
             this.userManager = userManager;
             this.accountTypeService = accountTypeService;
             this.categoriesService = categoriesService;
             this.companyInfoService = companyInfoService;
+            this.citiesService = citiesService;
         }
 
         public IActionResult JobPostings()
@@ -64,6 +66,9 @@
 
             var companyInfoId = this.companyInfoService.GetCompanyInfoId(userId);
             input.CompanyInfoId = companyInfoId;
+
+            var cityId = this.citiesService.GetCityId(input.CityName);
+            input.CityId = cityId;
 
             await this.jobPostingService.PostJobPostingAsync(input);
             return this.Redirect("/");
