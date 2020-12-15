@@ -32,7 +32,7 @@
                 ProfilePicture = this.UploadImageToCloudinary(input.ProfilePicture.OpenReadStream()),
                 CV = this.UploadCvFileToCloudinary(input.Cv.OpenReadStream()),
                 Address = input.Address,
-                City = input.City,
+                CityId = input.CityId,
             };
 
             await this.userInfoRepository.AddAsync(userInfo);

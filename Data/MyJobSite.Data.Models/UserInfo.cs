@@ -32,7 +32,9 @@
 
         public string Address { get; set; }
 
+        public virtual City City { get; set; }
+
         [Required]
-        public string City { get; set; }
+        public string CityId { get; set; }
     }
 }

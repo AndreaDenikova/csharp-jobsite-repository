@@ -16,11 +16,13 @@
     {
         private readonly IUserInfoService userInfoService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ICitiesService citiesService;
 
-        public UserInfoController(IUserInfoService userInfoService, UserManager<ApplicationUser> userManager)
+        public UserInfoController(IUserInfoService userInfoService, UserManager<ApplicationUser> userManager, ICitiesService citiesService)
         {
             this.userInfoService = userInfoService;
             this.userManager = userManager;
+            this.citiesService = citiesService;
         }
 
         public IActionResult UserInfo()
@@ -36,6 +38,9 @@
             {
                 return this.View();
             }
+
+            var cityId = this.citiesService.GetCityId(input.CityName);
+            input.CityId = cityId;
 
             input.UserId = this.userManager.GetUserId(this.User);
 
