@@ -16,23 +16,37 @@
     {
         private readonly ICandidateProfileService candidateProfileService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserInfoService userInfoService;
 
-        public CandidateProfileController(ICandidateProfileService candidateProfileService, UserManager<ApplicationUser> userManager)
+        public CandidateProfileController(ICandidateProfileService candidateProfileService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService)
         {
             this.candidateProfileService = candidateProfileService;
             this.userManager = userManager;
+            this.userInfoService = userInfoService;
         }
 
         [Authorize]
-        public async Task<IActionResult> CandidateProfile()
+        public async Task<IActionResult> CandidateProfile(string id)
         {
-            var userId = this.userManager.GetUserId(this.User);
+            if (string.IsNullOrEmpty(id))
+            {
+                var userId = this.userManager.GetUserId(this.User);
 
-            var viewModel = this.candidateProfileService.GetCandidateProfileInformation<CandidateProfileViewModel>(userId);
-            var user = await this.userManager.GetUserAsync(this.User);
-            var userEmail = await this.userManager.GetEmailAsync(user);
-            viewModel.Email = userEmail;
-            return this.View(viewModel);
+                var viewModel = this.candidateProfileService.GetCandidateProfileInformationByUserId<CandidateProfileViewModel>(userId);
+                var user = await this.userManager.GetUserAsync(this.User);
+                var userEmail = await this.userManager.GetEmailAsync(user);
+                viewModel.Email = userEmail;
+                return this.View(viewModel);
+            }
+            else
+            {
+                var viewModel = this.candidateProfileService.GetCandidateProfileInformation<CandidateProfileViewModel>(id);
+                var userId = this.userInfoService.GetUserInfoUserId(id);
+                var user = await this.userManager.FindByIdAsync(userId);
+                var userEmail = await this.userManager.GetEmailAsync(user);
+                viewModel.Email = userEmail;
+                return this.View(viewModel);
+            }
         }
     }
 }

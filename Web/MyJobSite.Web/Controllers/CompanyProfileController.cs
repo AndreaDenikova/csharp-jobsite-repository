@@ -28,12 +28,35 @@
         [Authorize]
         public async Task<IActionResult> CompanyProfile(string id)
         {
-            var viewModel = this.companyProfileService.GetCompanyProfileInformation<CompanyProfileViewModel>(id);
-            var userId = this.companyInfoService.GetCompanyInfoUserId(id);
-            var user = await this.userManager.FindByIdAsync(userId);
-            var userEmail = await this.userManager.GetEmailAsync(user);
-            viewModel.Email = userEmail;
-            return this.View(viewModel);
+            if (string.IsNullOrEmpty(id))
+            {
+                var userId = this.userManager.GetUserId(this.User);
+                var viewModel = this.companyProfileService.GetCompanyProfileInformationByUserId<CompanyProfileViewModel>(userId);
+                var user = await this.userManager.FindByIdAsync(userId);
+                var userEmail = await this.userManager.GetEmailAsync(user);
+                viewModel.Email = userEmail;
+                return this.View(viewModel);
+            }
+            else
+            {
+                var viewModel = this.companyProfileService.GetCompanyProfileInformation<CompanyProfileViewModel>(id);
+                var userId = this.companyInfoService.GetCompanyInfoUserId(id);
+                var user = await this.userManager.FindByIdAsync(userId);
+                var userEmail = await this.userManager.GetEmailAsync(user);
+                viewModel.Email = userEmail;
+                return this.View(viewModel);
+            }
         }
+
+        //[Authorize]
+        //public async Task<IActionResult> CompanyProfile()
+        //{
+        //    var userId = this.userManager.GetUserId(this.User);
+        //    var viewModel = this.companyProfileService.GetCompanyProfileInformationByUserId<CompanyProfileViewModel>(userId);
+        //    var user = await this.userManager.FindByIdAsync(userId);
+        //    var userEmail = await this.userManager.GetEmailAsync(user);
+        //    viewModel.Email = userEmail;
+        //    return this.View(viewModel);
+        //}
     }
 }

@@ -23,5 +23,11 @@
             var comp = this.companyRepository.All().Where(c => c.Id == id).To<T>().FirstOrDefault();
             return comp;
         }
+
+        public T GetCompanyProfileInformationByUserId<T>(string id)
+        {
+            var comp = this.companyRepository.All().Where(c => c.UserId == id).To<T>().FirstOrDefault();
+            return comp;
+        }
     }
 }

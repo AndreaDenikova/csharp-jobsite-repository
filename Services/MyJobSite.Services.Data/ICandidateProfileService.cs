@@ -9,5 +9,7 @@
     public interface ICandidateProfileService
     {
         T GetCandidateProfileInformation<T>(string id);
+
+        T GetCandidateProfileInformationByUserId<T>(string id);
     }
 }

@@ -20,9 +20,16 @@
             this.userInfoRepository = userInfoRepository;
         }
 
-        public T GetCandidateProfileInformation<T>(string id)
+        public T GetCandidateProfileInformationByUserId<T>(string id)
         {
             var userInfo = this.userInfoRepository.All().Where(u => u.UserId == id).To<T>().FirstOrDefault();
+
+            return userInfo;
+        }
+
+        public T GetCandidateProfileInformation<T>(string id)
+        {
+            var userInfo = this.userInfoRepository.All().Where(u => u.Id == id).To<T>().FirstOrDefault();
 
             return userInfo;
         }

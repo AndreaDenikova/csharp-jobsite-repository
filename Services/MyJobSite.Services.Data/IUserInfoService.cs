@@ -15,5 +15,7 @@
         string UploadCvFileToCloudinary(Stream imageFileStream);
 
         Task PostUserInfoAsync(UserInfoInputModel input);
+
+        string GetUserInfoUserId(string userInfoId);
     }
 }

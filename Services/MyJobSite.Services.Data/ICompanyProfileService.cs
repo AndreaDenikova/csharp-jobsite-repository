@@ -7,5 +7,7 @@
     public interface ICompanyProfileService
     {
         T GetCompanyProfileInformation<T>(string id);
+
+        T GetCompanyProfileInformationByUserId<T>(string id);
     }
 }

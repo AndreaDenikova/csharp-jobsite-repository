@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -73,6 +74,14 @@
             };
             var uploadResult = cloudinary.Upload(uploadParams);
             return uploadResult.SecureUri.AbsoluteUri;
+        }
+
+        public string GetUserInfoUserId(string userInfoId)
+        {
+            var user = this.userInfoRepository.All().Where(u => u.Id == userInfoId).FirstOrDefault();
+            var userId = user.UserId;
+
+            return userId;
         }
     }
 }
