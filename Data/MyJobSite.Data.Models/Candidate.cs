@@ -6,8 +6,13 @@
 
     using MyJobSite.Data.Common.Models;
 
-    public class Candidate
+    public class Candidate : BaseDeletableModel<string>
     {
+        public Candidate()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         public virtual ApplicationUser User { get; set; }
 
         public string UserId { get; set; }

@@ -184,7 +184,7 @@
                         }
                         <hr>
                         <div class="dez-post-readmore">
-                            <a href="#" class="btn btn-primary btn-primary">Apply Now</a>
+                            <a asp-controller="Candidate" asp-action="GetJobPosting" asp-route-id="@Model.Id" class="btn btn-primary btn-primary">Apply Now</a>
                         </div>
                         <div class="dez-post-readmore">
                             <a asp-controller="CandidateProfile" asp-action="CandidateProfile" asp-route-id="id" class="btn btn-primary btn-primary">View Candidates</a>
