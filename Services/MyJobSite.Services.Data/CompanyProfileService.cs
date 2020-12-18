@@ -20,7 +20,7 @@
 
         public T GetCompanyProfileInformation<T>(string id)
         {
-            var comp = this.companyRepository.All().Where(c => c.UserId == id).To<T>().FirstOrDefault();
+            var comp = this.companyRepository.All().Where(c => c.Id == id).To<T>().FirstOrDefault();
             return comp;
         }
     }

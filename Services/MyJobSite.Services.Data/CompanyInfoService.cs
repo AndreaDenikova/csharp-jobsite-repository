@@ -23,6 +23,14 @@
             this.companyInfoRepository = companyInfoRepository;
         }
 
+        public string GetCompanyInfoUserId(string companyInfoId)
+        {
+            var companyInfo = this.companyInfoRepository.All().Where(c => c.Id == companyInfoId).FirstOrDefault();
+            var companyInfoUserId = companyInfo.UserId;
+
+            return companyInfoUserId;
+        }
+
         public string GetCompanyInfoId(string userId)
         {
             var user = this.companyInfoRepository.All().Where(c => c.UserId == userId).FirstOrDefault();

@@ -22,5 +22,7 @@
         string GetCompanyInfoName(string companyInfoId);
 
         string GetCompanyInfoLogo(string companyInfoId);
+
+        string GetCompanyInfoUserId(string companyInfoId);
     }
 }
