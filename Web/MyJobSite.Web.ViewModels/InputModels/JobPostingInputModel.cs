@@ -45,7 +45,6 @@
         [Required]
         public string VacancyType { get; set; }
 
-        [Required]
         public string CityId { get; set; }
 
         [Required]

@@ -31,6 +31,22 @@
             return companyInfoId;
         }
 
+        public string GetCompanyInfoLogo(string companyInfoId)
+        {
+            var companyInfo = this.companyInfoRepository.All().Where(c => c.Id == companyInfoId).FirstOrDefault();
+            var logo = companyInfo.Logo;
+
+            return logo;
+        }
+
+        public string GetCompanyInfoName(string companyInfoId)
+        {
+            var companyInfo = this.companyInfoRepository.All().Where(c => c.Id == companyInfoId).FirstOrDefault();
+            var name = companyInfo.Name;
+
+            return name;
+        }
+
         public string GetCompanyLogo(string userId)
         {
             var user = this.companyInfoRepository.All().Where(c => c.UserId == userId).FirstOrDefault();

@@ -32,6 +32,7 @@
             this.citiesService = citiesService;
         }
 
+        [Authorize]
         public IActionResult JobPostings()
         {
             return this.View();
@@ -78,14 +79,22 @@
         [HttpGet]
         public IActionResult GetJobPosting(string id)
         {
-            var userId = this.userManager.GetUserId(this.User);
-            var logo = this.companyInfoService.GetCompanyLogo(userId);
-            var companyName = this.companyInfoService.GetCompanyName(userId);
+            var companyInfoId = this.jobPostingService.GetCompanyInfoId(id);
+            var companyInfoLogo = this.companyInfoService.GetCompanyInfoLogo(companyInfoId);
+            var companyInfoName = this.companyInfoService.GetCompanyInfoName(companyInfoId);
 
             var viewModel = this.jobPostingService.GetJobPostingInformation<JobPostingViewModel>(id);
-            viewModel.Logo = logo;
-            viewModel.CompanyName = companyName;
+            viewModel.Logo = companyInfoLogo;
+            viewModel.CompanyName = companyInfoName;
 
+            return this.View(viewModel);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult BrowseJobPostings(string id)
+        {
+            var viewModel = this.jobPostingService.GetJobPostingsInfo<BrowseJobPostingViewModel>(id);
             return this.View(viewModel);
         }
     }

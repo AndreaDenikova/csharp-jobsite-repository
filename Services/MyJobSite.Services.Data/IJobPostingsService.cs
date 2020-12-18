@@ -13,6 +13,10 @@
 
         T GetJobPostingInformation<T>(string id);
 
+        ICollection<T> GetJobPostingsInfo<T>(string categoryId);
+
         string GetJobPostingId(string id);
+
+        string GetCompanyInfoId(string jobPostingId);
     }
 }

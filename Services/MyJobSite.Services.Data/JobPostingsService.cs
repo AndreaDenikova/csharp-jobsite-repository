@@ -63,5 +63,20 @@
             await this.jobRepository.AddAsync(jobPosting);
             await this.jobRepository.SaveChangesAsync();
         }
+
+        public ICollection<T> GetJobPostingsInfo<T>(string categoryId)
+        {
+            var jobPostings = this.jobRepository.All().Where(c => c.JobPostingCategoryId == categoryId).To<T>().ToList();
+
+            return jobPostings;
+        }
+
+        public string GetCompanyInfoId(string jobPostingId)
+        {
+            var jobPosting = this.jobRepository.All().Where(j => j.Id == jobPostingId).FirstOrDefault();
+            var companyInfoId = jobPosting.CompanyInfoId;
+
+            return companyInfoId;
+        }
     }
 }

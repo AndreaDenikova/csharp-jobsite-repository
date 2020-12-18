@@ -1,10 +1,11 @@
-﻿using MyJobSite.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyJobSite.Data.Models
+﻿namespace MyJobSite.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using MyJobSite.Data.Common.Models;
+
     public class City : BaseDeletableModel<string>
     {
         public City()

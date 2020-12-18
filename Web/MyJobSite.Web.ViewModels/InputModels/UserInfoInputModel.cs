@@ -28,10 +28,11 @@
         public string LastName { get; set; }
 
         [MinLength(10)]
-        //[RegularExpression("$/^\\d+\\s[A-z]+\\s[A-z]+/g")]
+
+        // [RegularExpression("$/^\\d+\\s[A-z]+\\s[A-z]+/g")]
         public string Address { get; set; }
 
-        //[RegularExpression("$[A-Z][a-z]*")]
+        // [RegularExpression("$[A-Z][a-z]*")]
         public string CityId { get; set; }
 
         [Required]
