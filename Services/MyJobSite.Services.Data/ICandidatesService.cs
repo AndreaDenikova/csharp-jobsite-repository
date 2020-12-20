@@ -10,5 +10,7 @@
     public interface ICandidatesService
     {
         Task CreateNewCandidateForJobPostingAsync(string userId, string jobPostingId);
+
+        bool CheckIfCandidateAlreadyApplied(string userId, string jobPostingId);
     }
 }

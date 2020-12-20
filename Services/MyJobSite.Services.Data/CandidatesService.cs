@@ -19,6 +19,17 @@
             this.candidateRepository = candidateRepository;
         }
 
+        public bool CheckIfCandidateAlreadyApplied(string userId, string jobPostingId)
+        {
+            var candidate = this.candidateRepository.All().Where(c => c.UserId == userId && c.JobPostingId == jobPostingId).FirstOrDefault();
+
+            if (candidate == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task CreateNewCandidateForJobPostingAsync(string userId, string jobPostingId)
         {
             // if (this.candidateRepository.All().Where(c => c.UserId == input.UserId).FirstOrDefault() != null)
