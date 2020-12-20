@@ -58,29 +58,32 @@
                                     <a asp-controller="Category" asp-action="Categories"> Categories</a>
                                 </li>
                             }
-
                             @if (User.Identity.IsAuthenticated && accountTypeSerice.GetAccoutType(User) == "Candidate")
                             {
                                 <li>
                                     <a asp-controller="CandidateProfile" asp-action="CandidateProfile"> Profile</a>
                                 </li>
+
                             }
                             else if (User.Identity.IsAuthenticated && accountTypeSerice.GetAccoutType(User) == "Company")
                             {
                                 <li>
                                     <a asp-controller="CompanyProfile" asp-action="CompanyProfile"> Profile</a>
                                 </li>
+                                <li>
+                                    <a asp-controller="JobPostings" asp-action="GetCompanyJobPostings"> MyJobPostings</a>
+                                </li>
                             }
 
                             @*<li>
-            <a href="#">New Job Posting</a>
-        </li>*@
+                                    <a href="#">New Job Posting</a>
+                                </li>*@
                             @*<li>
-            <a href="#">Job Postings</a>
-        </li>*@
+                                    <a href="#">Job Postings</a>
+                                </li>*@
                             @*<li>
-            <a href="#">Candidates</a>
-        </li>*@
+                                    <a href="#">Candidates</a>
+                                </li>*@
                         </ul>
                     </div>
                 </div>

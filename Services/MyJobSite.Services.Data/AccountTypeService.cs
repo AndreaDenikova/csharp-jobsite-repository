@@ -36,5 +36,12 @@
 
             return userType;
         }
+
+        public string GetUserId(ClaimsPrincipal claimsPrincipal)
+        {
+            var user = this.userManager.GetUserAsync(claimsPrincipal).GetAwaiter().GetResult();
+            string userId = user.Id;
+            return userId;
+        }
     }
 }

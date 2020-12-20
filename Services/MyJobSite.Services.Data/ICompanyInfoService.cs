@@ -5,6 +5,7 @@
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
+
     using MyJobSite.Web.ViewModels.InputModels;
 
     public interface ICompanyInfoService

@@ -97,5 +97,18 @@
             var viewModel = this.jobPostingService.GetJobPostingsInfo<BrowseJobPostingViewModel>(id);
             return this.View(viewModel);
         }
+
+        [Authorize]
+        [HttpGet]
+
+        public IActionResult GetCompanyJobPostings()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var companyInfoId = this.companyInfoService.GetCompanyInfoId(userId);
+
+            var viewModel = this.jobPostingService.GetCompanyAllJobPostingsInfo<BrowseJobPostingViewModel>(companyInfoId);
+
+            return this.View(viewModel);
+        }
     }
 }

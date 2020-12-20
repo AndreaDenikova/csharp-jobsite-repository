@@ -10,6 +10,8 @@
     {
         string GetAccoutType(ClaimsPrincipal claimsPrincipal);
 
+        string GetUserId(ClaimsPrincipal claimsPrincipal);
+
         string GetAccountTypeController(string userId);
     }
 }

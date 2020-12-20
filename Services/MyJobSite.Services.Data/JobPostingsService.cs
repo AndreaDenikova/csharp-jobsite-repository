@@ -78,5 +78,12 @@
 
             return companyInfoId;
         }
+
+        public ICollection<T> GetCompanyAllJobPostingsInfo<T>(string companyInfoId)
+        {
+            var jobPostings = this.jobRepository.All().Where(j => j.CompanyInfoId == companyInfoId).To<T>().ToList();
+
+            return jobPostings;
+        }
     }
 }

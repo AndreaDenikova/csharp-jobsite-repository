@@ -1,4 +1,6 @@
-﻿@model MyJobSite.Web.ViewModels.ViewModels.JobPosting.JobPostingViewModel
+﻿@inject MyJobSite.Services.Data.IAccountTypeService accountTypeSerice
+@inject MyJobSite.Services.Data.ICompanyInfoService companyInfoService
+@model MyJobSite.Web.ViewModels.ViewModels.JobPosting.JobPostingViewModel
 @{
     ViewData["Title"] = "GetJobPosting";
 }
@@ -68,7 +70,7 @@
                                 <h4>@Model.Title</h4>
                                 @if (Model.MinSalary != 0 && Model.MaxSalary != 0)
                                 {
-                                    <h5>@Model.MinSalary - @Model.MaxSalary</h5>
+                                    <h5>$@Model.MinSalary - $@Model.MaxSalary</h5>
                                 }
                                 else if (Model.MinSalary == 0 && Model.MaxSalary == 0)
                                 {
@@ -76,15 +78,18 @@
                                 }
                                 else if (Model.MinSalary == 0)
                                 {
-                                    <h5>Maximum Salary: @Model.MaxSalary</h5>
+                                    <h5>Maximum Salary: $@Model.MaxSalary</h5>
                                 }
                                 else
                                 {
-                                    <h5>Minimum Salary: @Model.MinSalary</h5>
+                                    <h5>Minimum Salary: $@Model.MinSalary</h5>
                                 }
                                 <p class="text-muted font-size-sm">Address: @Model.Address</p>
-                                <button class="btn btn-outline-primary">Email Us</button>
-                                <a href="#" class="btn btn-sm btn-danger">Report</a>
+                                @if (companyInfoService.GetCompanyInfoUserId(Model.CompanyInfoId) != accountTypeSerice.GetUserId(User))
+                                {
+                                    <button class="btn btn-outline-primary">Email Us</button>
+                                    <a href="#" class="btn btn-sm btn-danger">Report</a>
+                                }
                             </div>
                         </div>
                     </div>
@@ -119,7 +124,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">By:</h6>
+                                <h6 class="mb-0">By</h6>
                             </div>
                             <a asp-controller="CompanyProfile" asp-action="CompanyProfile" asp-route-id="@Model.CompanyInfoId" class="col-sm-9 text-secondary">
                                 @Model.CompanyName
@@ -182,13 +187,13 @@
                                 </div>
                             </div>
                         }
-                        <hr>
-                        <div class="dez-post-readmore">
-                            <a asp-controller="Candidate" asp-action="GetJobPosting" asp-route-id="@Model.Id" class="btn btn-primary btn-primary">Apply Now</a>
-                        </div>
-                        <div class="dez-post-readmore">
-                            <a asp-controller="CandidateProfile" asp-action="CandidateProfile" asp-route-id="id" class="btn btn-primary btn-primary">View Candidates</a>
-                        </div>
+                        @if (accountTypeSerice.GetAccoutType(User) == "Candidate")
+                        {
+                            <hr>
+                            <div class="dez-post-readmore">
+                                <a asp-controller="Candidate" asp-action="GetJobPosting" asp-route-id="@Model.Id" class="btn btn-primary btn-primary">Apply Now</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

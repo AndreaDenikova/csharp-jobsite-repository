@@ -15,6 +15,8 @@
 
         ICollection<T> GetJobPostingsInfo<T>(string categoryId);
 
+        ICollection<T> GetCompanyAllJobPostingsInfo<T>(string companyInfoId);
+
         string GetJobPostingId(string id);
 
         string GetCompanyInfoId(string jobPostingId);
