@@ -11,5 +11,7 @@
         T GetCandidateProfileInformation<T>(string id);
 
         T GetCandidateProfileInformationByUserId<T>(string id);
+
+        ICollection<T> GetCandidatesProfileInfoByUserIds<T>(ICollection<string> ids);
     }
 }

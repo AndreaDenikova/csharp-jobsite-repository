@@ -1,5 +1,6 @@
 ﻿@*@page*@
 @inject MyJobSite.Services.Data.ICitiesService citiesService
+@inject MyJobSite.Services.Data.ICategoriesService categoriesService
 @model IEnumerable<MyJobSite.Web.ViewModels.ViewModels.JobPosting.BrowseJobPostingViewModel>
 @{
     ViewData["Title"] = "GetCompanyJobPostings";
@@ -57,7 +58,6 @@
                     <div class="dez-bnr-inr-entry">
                         <h1 class="text-white">All Job Postings</h1>
                         <!-- Breadcrumb row -->
-                        
                         <!-- Breadcrumb row END -->
                     </div>
                 </div>
@@ -173,11 +173,10 @@
                                         <div class="clearfix">
                                             <h5 class="widget-title font-weight-700 text-uppercase">Category</h5>
                                             <select>
-                                                <option>Any Category</option>
-                                                <option>Automotive Jobs</option>
-                                                <option>Construction Facilities</option>
-                                                <option>Design, Art & Multimedia</option>
-                                                <option>Food Services</option>
+                                                @foreach (var category in categoriesService.GetCategoriesNames())
+                                                {
+                                                    <option>@category</option>
+                                                }
                                             </select>
                                         </div>
                                         <hr>

@@ -194,6 +194,13 @@
                                 <a asp-controller="Candidate" asp-action="GetJobPosting" asp-route-id="@Model.Id" class="btn btn-primary btn-primary">Apply Now</a>
                             </div>
                         }
+                        @if (accountTypeSerice.GetAccoutType(User) == "Company")
+                        {
+                            <hr>
+                            <div class="dez-post-readmore">
+                                <a asp-controller="CandidateProfile" asp-action="BrowseCandidates" asp-route-id="@Model.Id" class="btn btn-primary btn-primary">View All Candidates</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

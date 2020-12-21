@@ -11,18 +11,21 @@
     using MyJobSite.Data.Models;
     using MyJobSite.Services.Data;
     using MyJobSite.Web.ViewModels.ViewModels;
+    using MyJobSite.Web.ViewModels.ViewModels.Candidate;
 
     public class CandidateProfileController : BaseController
     {
         private readonly ICandidateProfileService candidateProfileService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserInfoService userInfoService;
+        private readonly ICandidatesService candidatesService;
 
-        public CandidateProfileController(ICandidateProfileService candidateProfileService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService)
+        public CandidateProfileController(ICandidateProfileService candidateProfileService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService, ICandidatesService candidatesService)
         {
             this.candidateProfileService = candidateProfileService;
             this.userManager = userManager;
             this.userInfoService = userInfoService;
+            this.candidatesService = candidatesService;
         }
 
         [Authorize]
@@ -47,6 +50,15 @@
                 viewModel.Email = userEmail;
                 return this.View(viewModel);
             }
+        }
+
+        [Authorize]
+        public IActionResult BrowseCandidates(string id) //// jobPostingId
+        {
+            var ids = this.candidatesService.GetAllUsersIdOfJobPosting(id);
+            var viewModel = this.candidateProfileService.GetCandidatesProfileInfoByUserIds<BrowseCandidatesViewModel>(ids);
+
+            return this.View(viewModel);
         }
     }
 }

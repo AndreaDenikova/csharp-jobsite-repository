@@ -76,9 +76,9 @@
             return uploadResult.SecureUri.AbsoluteUri;
         }
 
-        public string GetUserInfoUserId(string userInfoId)
+        public string GetUserInfoUserId(string id)
         {
-            var user = this.userInfoRepository.All().Where(u => u.Id == userInfoId).FirstOrDefault();
+            var user = this.userInfoRepository.All().Where(u => u.UserId == id).FirstOrDefault();
             var userId = user.UserId;
 
             return userId;

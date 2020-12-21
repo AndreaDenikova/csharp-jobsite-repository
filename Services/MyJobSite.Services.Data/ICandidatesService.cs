@@ -12,5 +12,7 @@
         Task CreateNewCandidateForJobPostingAsync(string userId, string jobPostingId);
 
         bool CheckIfCandidateAlreadyApplied(string userId, string jobPostingId);
+
+        ICollection<string> GetAllUsersIdOfJobPosting(string jobPostingId);
     }
 }

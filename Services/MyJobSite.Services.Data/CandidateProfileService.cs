@@ -29,9 +29,22 @@
 
         public T GetCandidateProfileInformation<T>(string id)
         {
-            var userInfo = this.userInfoRepository.All().Where(u => u.Id == id).To<T>().FirstOrDefault();
+            var userInfo = this.userInfoRepository.All().Where(u => u.UserId == id).To<T>().FirstOrDefault();
 
             return userInfo;
+        }
+
+        public ICollection<T> GetCandidatesProfileInfoByUserIds<T>(ICollection<string> ids)
+        {
+            var listOfCandidates = new List<T>();
+
+            foreach (var id in ids)
+            {
+                var candidate = this.userInfoRepository.All().Where(c => c.UserId == id).To<T>().FirstOrDefault();
+                listOfCandidates.Add(candidate);
+            }
+
+            return listOfCandidates;
         }
     }
 }

@@ -27,6 +27,7 @@
             {
                 return false;
             }
+
             return true;
         }
 
@@ -43,6 +44,25 @@
             };
             await this.candidateRepository.AddAsync(candidate);
             await this.candidateRepository.SaveChangesAsync();
+        }
+
+        public ICollection<string> GetAllUsersIdOfJobPosting(string jobPostingId)
+        {
+            var candidates = this.candidateRepository.All().Where(c => c.JobPostingId == jobPostingId).ToList();
+
+            var listOfUserIds = new List<string>();
+
+            foreach (var candidate in candidates)
+            {
+                var userId = candidate.UserId;
+
+                if (!listOfUserIds.Contains(userId))
+                {
+                    listOfUserIds.Add(userId);
+                }
+            }
+
+            return listOfUserIds;
         }
     }
 }
