@@ -21,8 +21,9 @@
         private readonly ICategoriesService categoriesService;
         private readonly ICompanyInfoService companyInfoService;
         private readonly ICitiesService citiesService;
+        private readonly ICandidatesService candidatesService;
 
-        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService)
+        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService, ICandidatesService candidatesService)
         {
             this.jobPostingService = jobPostingService;
             this.userManager = userManager;
@@ -30,6 +31,7 @@
             this.categoriesService = categoriesService;
             this.companyInfoService = companyInfoService;
             this.citiesService = citiesService;
+            this.candidatesService = candidatesService;
         }
 
         [Authorize]
@@ -107,6 +109,25 @@
             var companyInfoId = this.companyInfoService.GetCompanyInfoId(userId);
 
             var viewModel = this.jobPostingService.GetCompanyAllJobPostingsInfo<BrowseJobPostingViewModel>(companyInfoId);
+
+            return this.View(viewModel);
+        }
+
+        [Authorize]
+        [HttpGet]
+
+        public ActionResult GetCandidateApplyings()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            var ids = this.candidatesService.GetAllJobPostingsIds(userId);
+
+            if (ids == null)
+            {
+                this.RedirectToAction("GetNoApplyingsForJobPosting", "MessagesToUsers");
+            }
+
+            var viewModel = this.jobPostingService.GetCandidateAllJobPostingsInformation<BrowseJobPostingViewModel>(ids);
 
             return this.View(viewModel);
         }

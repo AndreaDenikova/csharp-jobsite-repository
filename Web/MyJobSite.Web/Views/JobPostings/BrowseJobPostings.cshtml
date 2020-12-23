@@ -124,7 +124,7 @@
                                                             }
                                                         </div>
                                                     </div>
-                                                    <span class="post-like fa fa-heart-o"></span>
+                                                    <a asp-controller="FavoriteJobPostings" asp-action="AddToFavorites" asp-route-id="@jobPosting.Id" class="post-like fa fa-heart-o"></a>
                                                 </a>
                                             </li>
                                         }

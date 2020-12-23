@@ -46,6 +46,25 @@
             await this.candidateRepository.SaveChangesAsync();
         }
 
+        public ICollection<string> GetAllJobPostingsIds(string userId)
+        {
+            var jobPostings = this.candidateRepository.All().Where(c => c.UserId == userId).ToList();
+
+            var listOfJobPostingsIds = new List<string>();
+
+            foreach (var jobPosting in jobPostings)
+            {
+                var jobPostingsId = jobPosting.JobPostingId;
+
+                if (!listOfJobPostingsIds.Contains(jobPostingsId))
+                {
+                    listOfJobPostingsIds.Add(jobPostingsId);
+                }
+            }
+
+            return listOfJobPostingsIds;
+        }
+
         public ICollection<string> GetAllUsersIdOfJobPosting(string jobPostingId)
         {
             var candidates = this.candidateRepository.All().Where(c => c.JobPostingId == jobPostingId).ToList();

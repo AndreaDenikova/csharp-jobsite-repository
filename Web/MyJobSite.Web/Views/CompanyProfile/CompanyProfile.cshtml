@@ -1,4 +1,6 @@
-﻿@model MyJobSite.Web.ViewModels.ViewModels.CompanyProfileViewModel
+﻿@inject MyJobSite.Services.Data.IAccountTypeService accountTypeSerice
+@inject MyJobSite.Services.Data.ICompanyInfoService companyInfoService
+@model MyJobSite.Web.ViewModels.ViewModels.CompanyProfileViewModel
 @{
     ViewData["Title"] = "CompanyProfile";
 }
@@ -66,8 +68,11 @@
                             <img src="@Model.Logo" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
                                 <h4>Microsoft</h4>
-                                <button class="btn btn-outline-primary">Message</button>
-                                <a href="#" class="btn btn-sm btn-danger">Report</a>
+                                @if (companyInfoService.GetCompanyInfoUserId(Model.Id) != accountTypeSerice.GetUserId(User))
+                                {
+                                    <button class="btn btn-outline-primary">Email Us</button>
+                                    <a href="#" class="btn btn-sm btn-danger">Report</a>
+                                }
                             </div>
                         </div>
                     </div>
@@ -102,8 +107,8 @@
                     <div class="card-body">
                         <div class="row">
                             @*<div class="col-sm-3">
-                                <h6 class="mb-0">@Model.Email</h6>
-                            </div>*@
+                                    <h6 class="mb-0">@Model.Email</h6>
+                                </div>*@
                             <div class="col-sm-9 text-secondary">
                                 @Model.CompanyName
                             </div>
@@ -114,7 +119,7 @@
                                 <h6 class="mb-0">Phone</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                               @Model.PhoneNumber
+                                @Model.PhoneNumber
                             </div>
                         </div>
                         <hr>
@@ -137,67 +142,10 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row gutters-sm">
-                    <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
-                            @*<div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>*@
-                                @*<div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
-                            @*<div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>*@
-                            <a href="#" class="btn btn-sm btn-danger">Report <span class="glyphicon glyphicon-bullhorn"></span></a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- JAVASCRIPT FILES ========================================= -->
 <script src="/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->

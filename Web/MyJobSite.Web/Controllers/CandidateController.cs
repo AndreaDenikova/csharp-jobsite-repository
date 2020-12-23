@@ -40,7 +40,7 @@
 
             if (userAlreadyApplied == true)
             {
-                return this.Redirect("/");
+                return this.RedirectToAction("AlreadyAppliedForJobPosting", "MessagesToUsers");
             }
 
             await this.candidatesService.CreateNewCandidateForJobPostingAsync(userId, id);

@@ -14,5 +14,7 @@
         bool CheckIfCandidateAlreadyApplied(string userId, string jobPostingId);
 
         ICollection<string> GetAllUsersIdOfJobPosting(string jobPostingId);
+
+        ICollection<string> GetAllJobPostingsIds(string userId); //// userId = candidateId
     }
 }

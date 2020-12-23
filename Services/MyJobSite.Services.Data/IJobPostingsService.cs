@@ -13,6 +13,8 @@
 
         T GetJobPostingInformation<T>(string id);
 
+        ICollection<T> GetCandidateAllJobPostingsInformation<T>(ICollection<string> ids); //// ids = jobPostingsIds
+
         ICollection<T> GetJobPostingsInfo<T>(string categoryId);
 
         ICollection<T> GetCompanyAllJobPostingsInfo<T>(string companyInfoId);

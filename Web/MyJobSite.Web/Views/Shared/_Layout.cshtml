@@ -33,10 +33,15 @@
                     <!-- extra nav -->
                     <div class="extra-nav">
                         <div class="extra-cell">
-
-                            <a asp-area="Identity" asp-page="/Account/Register" class="site-button"><i class="fa fa-user"></i> SignUp</a>
-                            <a asp-area="Identity" asp-page="/Account/Login" class="site-button"><i class="fa fa-lock"></i> LogIn</a>
-
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a asp-area="Identity" asp-page="/Account/Register" class="site-button"><i class="fa fa-user"></i> SignUp</a>
+                                <a asp-area="Identity" asp-page="/Account/Login" class="site-button"><i class="fa fa-lock"></i> LogIn</a>
+                            }
+                            else
+                            {
+                                <a asp-area="Identity" asp-page="/Account/Logout" class="site-button"><i class="fa fa-lock"></i> LogOut</a>
+                            }
                         </div>
                     </div>
                     <!-- Quik search -->
@@ -63,6 +68,9 @@
                                 <li>
                                     <a asp-controller="CandidateProfile" asp-action="CandidateProfile"> Profile</a>
                                 </li>
+                                <li>
+                                    <a asp-controller="JobPostings" asp-action="GetCandidateApplyings"> MyApplyings</a>
+                                </li>
 
                             }
                             else if (User.Identity.IsAuthenticated && accountTypeSerice.GetAccoutType(User) == "Company")
@@ -76,14 +84,14 @@
                             }
 
                             @*<li>
-                                    <a href="#">New Job Posting</a>
-                                </li>*@
+            <a href="#">New Job Posting</a>
+        </li>*@
                             @*<li>
-                                    <a href="#">Job Postings</a>
-                                </li>*@
+            <a href="#">Job Postings</a>
+        </li>*@
                             @*<li>
-                                    <a href="#">Candidates</a>
-                                </li>*@
+            <a href="#">Candidates</a>
+        </li>*@
                         </ul>
                     </div>
                 </div>
