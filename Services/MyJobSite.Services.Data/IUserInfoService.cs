@@ -17,5 +17,7 @@
         Task PostUserInfoAsync(UserInfoInputModel input);
 
         string GetUserInfoUserId(string userInfoId);
+
+        bool CheckIfHasInformation(string userId);
     }
 }

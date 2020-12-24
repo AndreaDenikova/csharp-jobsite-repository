@@ -111,13 +111,13 @@
                         </div>
                         @*<hr>*@
                         @*<div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Phone</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                (239) 816-9029
-                            </div>
-                        </div>*@
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    (239) 816-9029
+                                </div>
+                            </div>*@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
@@ -132,19 +132,23 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0">CV</h6>
                             </div>
-                            <a href="https://res.cloudinary.com/dbtzqb6py/image/upload/v1608629472/fdu9srdhxvclewyc40pt.pdf" class="col-sm-9 text-secondary" download>
-                                    Download CV
-                            </a>
+                            <a href="@Model.Cv.Replace("/upload", "/upload/fl_attachment")" class="col-sm-9 text-secondary">Download CV</a>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Address</h6>
+
+                        @if (Model.Address != null)
+                        {
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.Address
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                @Model.Address
-                            </div>
-                        </div>
+                        }
+
+
                     </div>
                 </div>
 
@@ -226,3 +230,23 @@
 <script src="/js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
 <script src="/js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS  -->
 <script src="/js/dz.ajax.js"></script><!-- CONTACT JS  -->
+<script>
+    function downloadURI(uri, name) {
+        var link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        delete link;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#link").click(function (e) {
+            e.preventDefault();
+            window.location.href
+                = 'https://res.cloudinary.com/dbtzqb6py/image/upload/v1608629472/fdu9srdhxvclewyc40pt.pdf';
+        });
+    });
+</script>

@@ -62,9 +62,9 @@
         {
             Account account = new Account
             {
-                Cloud = "dbtzqb6py",
-                ApiKey = "276848394448911",
-                ApiSecret = "ymMC-yDsSc2BGAtvUYWrOcDLaTg",
+                Cloud = "alekskn99",
+                ApiKey = "217256488653521",
+                ApiSecret = "JNv29i2PKDHUT8hI_861sL8tQ0s",
             };
 
             Cloudinary cloudinary = new Cloudinary(account);
@@ -82,6 +82,18 @@
             var userId = user.UserId;
 
             return userId;
+        }
+
+        public bool CheckIfHasInformation(string userId)
+        {
+            var userInfo = this.userInfoRepository.All().Where(u => u.UserId == userId).FirstOrDefault();
+
+            if (userInfo == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

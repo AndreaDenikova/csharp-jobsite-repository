@@ -25,5 +25,7 @@
         string GetCompanyInfoLogo(string companyInfoId);
 
         string GetCompanyInfoUserId(string companyInfoId);
+
+        bool CheckIfHasInformation(string userId);
     }
 }

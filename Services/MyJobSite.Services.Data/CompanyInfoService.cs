@@ -103,5 +103,17 @@
             var uploadResult = cloudinary.Upload(uploadParams);
             return uploadResult.SecureUri.AbsoluteUri;
         }
+
+        public bool CheckIfHasInformation(string userId)
+        {
+            var companyInfo = this.companyInfoRepository.All().Where(c => c.UserId == userId).FirstOrDefault();
+
+            if (companyInfo == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
