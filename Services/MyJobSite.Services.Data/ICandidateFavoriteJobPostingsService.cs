@@ -9,6 +9,10 @@
     {
         Task AddNewCandidatesFavoriteJobPosting(string userId, string jobPostingId);
 
+        Task DeleteJobPostingFromFavorites(string userid, string jobPostingId);
+
         bool CheckIfFavoriteJobPostingAlreadyExists(string userId, string jobPostingId);
+
+        ICollection<string> GetAllFavoriteJobPostingsIds(string userId);
     }
 }

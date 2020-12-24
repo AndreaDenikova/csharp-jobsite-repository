@@ -43,5 +43,31 @@
                 return true;
             }
         }
+
+        public async Task DeleteJobPostingFromFavorites(string userid, string jobPostingId)
+        {
+            var favorite = this.favoriteJobPostingRepository.All().Where(f => f.UserId == userid && f.JobPostingId == jobPostingId).FirstOrDefault();
+            this.favoriteJobPostingRepository.HardDelete(favorite);
+            await this.favoriteJobPostingRepository.SaveChangesAsync();
+        }
+
+        public ICollection<string> GetAllFavoriteJobPostingsIds(string userId)
+        {
+            var favorites = this.favoriteJobPostingRepository.All().Where(f => f.UserId == userId).ToList();
+
+            var listOfIds = new List<string>();
+
+            foreach (var favorite in favorites)
+            {
+                var jobPostingId = favorite.JobPostingId;
+
+                if (!listOfIds.Contains(jobPostingId))
+                {
+                    listOfIds.Add(jobPostingId);
+                }
+            }
+
+            return listOfIds;
+        }
     }
 }
