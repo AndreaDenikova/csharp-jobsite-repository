@@ -17,12 +17,14 @@
         private readonly ICompanyProfileService companyProfileService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICompanyInfoService companyInfoService;
+        private readonly IAccountTypeService accountTypeService;
 
-        public CompanyProfileController(ICompanyProfileService companyProfileService, UserManager<ApplicationUser> userManager, ICompanyInfoService companyInfoService)
+        public CompanyProfileController(ICompanyProfileService companyProfileService, UserManager<ApplicationUser> userManager, ICompanyInfoService companyInfoService, IAccountTypeService accountTypeService)
         {
             this.companyProfileService = companyProfileService;
             this.userManager = userManager;
             this.companyInfoService = companyInfoService;
+            this.accountTypeService = accountTypeService;
         }
 
         [Authorize]
@@ -31,6 +33,17 @@
             if (string.IsNullOrEmpty(id))
             {
                 var userId = this.userManager.GetUserId(this.User);
+                var accountType = this.accountTypeService.GetAccountTypeController(userId);
+                if (accountType == "Company")
+                {
+                    var checkInformation = this.companyInfoService.CheckIfHasInformation(userId);
+
+                    if (checkInformation == false)
+                    {
+                        return this.RedirectToAction("CompanyInfo", "CompanyInfo");
+                    }
+                }
+
                 var viewModel = this.companyProfileService.GetCompanyProfileInformationByUserId<CompanyProfileViewModel>(userId);
                 var user = await this.userManager.FindByIdAsync(userId);
                 var userEmail = await this.userManager.GetEmailAsync(user);
@@ -39,24 +52,13 @@
             }
             else
             {
+                var userId = this.companyInfoService.GetUserId(id);
                 var viewModel = this.companyProfileService.GetCompanyProfileInformation<CompanyProfileViewModel>(id);
-                var userId = this.companyInfoService.GetCompanyInfoUserId(id);
                 var user = await this.userManager.FindByIdAsync(userId);
                 var userEmail = await this.userManager.GetEmailAsync(user);
                 viewModel.Email = userEmail;
                 return this.View(viewModel);
             }
         }
-
-        //[Authorize]
-        //public async Task<IActionResult> CompanyProfile()
-        //{
-        //    var userId = this.userManager.GetUserId(this.User);
-        //    var viewModel = this.companyProfileService.GetCompanyProfileInformationByUserId<CompanyProfileViewModel>(userId);
-        //    var user = await this.userManager.FindByIdAsync(userId);
-        //    var userEmail = await this.userManager.GetEmailAsync(user);
-        //    viewModel.Email = userEmail;
-        //    return this.View(viewModel);
-        //}
     }
 }

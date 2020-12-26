@@ -16,6 +16,8 @@
 
         string GetCompanyInfoId(string userId);
 
+        string GetUserId(string companyInfoId);
+
         string GetCompanyLogo(string userId);
 
         string GetCompanyName(string userId);

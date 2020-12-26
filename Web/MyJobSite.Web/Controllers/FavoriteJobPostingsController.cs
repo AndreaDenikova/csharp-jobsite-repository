@@ -18,13 +18,15 @@
         private readonly IAccountTypeService accountTypeService;
         private readonly IJobPostingsService jobPostingsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserInfoService userInfoService;
 
-        public FavoriteJobPostingsController(ICandidateFavoriteJobPostingsService candidateFavoriteJobPostingsService, IAccountTypeService accountTypeService, IJobPostingsService jobPostingsService, UserManager<ApplicationUser> userManager)
+        public FavoriteJobPostingsController(ICandidateFavoriteJobPostingsService candidateFavoriteJobPostingsService, IAccountTypeService accountTypeService, IJobPostingsService jobPostingsService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService)
         {
             this.candidateFavoriteJobPostingsService = candidateFavoriteJobPostingsService;
             this.accountTypeService = accountTypeService;
             this.jobPostingsService = jobPostingsService;
             this.userManager = userManager;
+            this.userInfoService = userInfoService;
         }
 
         [Authorize]
@@ -58,6 +60,13 @@
             if (accountType == "Company")
             {
                 this.Redirect("/");
+            }
+
+            var checkInfo = this.userInfoService.CheckIfHasInformation(userId);
+
+            if (checkInfo == false)
+            {
+                return this.RedirectToAction("UserInfo", "UserInfo");
             }
 
             var jobPostingsIds = this.candidateFavoriteJobPostingsService.GetAllFavoriteJobPostingsIds(userId);

@@ -41,7 +41,7 @@
 
                 if (checkInformation == false)
                 {
-                    this.RedirectToAction("UserInfo", "UserInfo");
+                    return this.RedirectToAction("UserInfo", "UserInfo");
                 }
             }
             else if (accountType == "Company")
@@ -50,7 +50,7 @@
 
                 if (checkInformation == false)
                 {
-                    this.RedirectToAction("UserInfo", "UserInfo");
+                    return this.RedirectToAction("CompanyInfo", "CompanyInfo");
                 }
             }
 

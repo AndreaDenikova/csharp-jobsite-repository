@@ -115,5 +115,13 @@
 
             return true;
         }
+
+        public string GetUserId(string companyInfoId)
+        {
+            var companyInfo = this.companyInfoRepository.All().Where(c => c.Id == companyInfoId).FirstOrDefault();
+            var userId = companyInfo.UserId;
+
+            return userId;
+        }
     }
 }

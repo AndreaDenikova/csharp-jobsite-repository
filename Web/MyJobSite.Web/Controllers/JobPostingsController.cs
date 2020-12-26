@@ -22,8 +22,9 @@
         private readonly ICompanyInfoService companyInfoService;
         private readonly ICitiesService citiesService;
         private readonly ICandidatesService candidatesService;
+        private readonly IUserInfoService userInfoService;
 
-        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService, ICandidatesService candidatesService)
+        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService, ICandidatesService candidatesService, IUserInfoService userInfoService)
         {
             this.jobPostingService = jobPostingService;
             this.userManager = userManager;
@@ -32,6 +33,7 @@
             this.companyInfoService = companyInfoService;
             this.citiesService = citiesService;
             this.candidatesService = candidatesService;
+            this.userInfoService = userInfoService;
         }
 
         [Authorize]
@@ -106,6 +108,21 @@
         public IActionResult GetCompanyJobPostings()
         {
             var userId = this.userManager.GetUserId(this.User);
+
+            var accountType = this.accountTypeService.GetAccountTypeController(userId);
+
+            if (accountType == "Candidate")
+            {
+                return this.Redirect("/");
+            }
+
+            var checkInfo = this.companyInfoService.CheckIfHasInformation(userId);
+
+            if (checkInfo == false)
+            {
+                return this.RedirectToAction("CompanyInfo", "CompanyInfo");
+            }
+
             var companyInfoId = this.companyInfoService.GetCompanyInfoId(userId);
 
             var viewModel = this.jobPostingService.GetCompanyAllJobPostingsInfo<BrowseJobPostingViewModel>(companyInfoId);
@@ -120,11 +137,18 @@
         {
             var userId = this.userManager.GetUserId(this.User);
 
+            var checkInfo = this.userInfoService.CheckIfHasInformation(userId);
+
+            if (checkInfo == false)
+            {
+                return this.RedirectToAction("UserInfo", "UserInfo");
+            }
+
             var ids = this.candidatesService.GetAllJobPostingsIds(userId);
 
             if (ids == null)
             {
-                this.RedirectToAction("GetNoApplyingsForJobPosting", "MessagesToUsers");
+                return this.RedirectToAction("GetNoApplyingsForJobPosting", "MessagesToUsers");
             }
 
             var viewModel = this.jobPostingService.GetCandidateAllJobPostingsInformation<BrowseJobPostingViewModel>(ids);

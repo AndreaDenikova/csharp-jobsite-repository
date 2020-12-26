@@ -19,13 +19,15 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserInfoService userInfoService;
         private readonly ICandidatesService candidatesService;
+        private readonly IAccountTypeService accountTypeService;
 
-        public CandidateProfileController(ICandidateProfileService candidateProfileService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService, ICandidatesService candidatesService)
+        public CandidateProfileController(ICandidateProfileService candidateProfileService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService, ICandidatesService candidatesService, IAccountTypeService accountTypeService)
         {
             this.candidateProfileService = candidateProfileService;
             this.userManager = userManager;
             this.userInfoService = userInfoService;
             this.candidatesService = candidatesService;
+            this.accountTypeService = accountTypeService;
         }
 
         [Authorize]
@@ -34,6 +36,17 @@
             if (string.IsNullOrEmpty(id))
             {
                 var userId = this.userManager.GetUserId(this.User);
+                var accountType = this.accountTypeService.GetAccountTypeController(userId);
+
+                if (accountType == "Candidate")
+                {
+                    var checkInformation = this.userInfoService.CheckIfHasInformation(userId);
+
+                    if (checkInformation == false)
+                    {
+                        return this.RedirectToAction("UserInfo", "UserInfo");
+                    }
+                }
 
                 var viewModel = this.candidateProfileService.GetCandidateProfileInformationByUserId<CandidateProfileViewModel>(userId);
                 var user = await this.userManager.GetUserAsync(this.User);
