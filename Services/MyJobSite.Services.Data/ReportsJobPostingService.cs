@@ -8,6 +8,7 @@
 
     using MyJobSite.Data.Common.Repositories;
     using MyJobSite.Data.Models;
+    using MyJobSite.Services.Mapping;
 
     public class ReportsJobPostingService : IReportsJobPostingService
     {
@@ -48,6 +49,25 @@
             this.reportedJobPostingsRepository.HardDelete(report);
 
             await this.reportedJobPostingsRepository.SaveChangesAsync();
+        }
+
+        public ICollection<string> GetAllReportedJobPostings()
+        {
+            var jobPostings = this.reportedJobPostingsRepository.All().ToList();
+
+            var listOfIds = new List<string>();
+
+            foreach (var report in jobPostings)
+            {
+                var id = report.JobPostingId;
+
+                if (!listOfIds.Contains(id))
+                {
+                    listOfIds.Add(id);
+                }
+            }
+
+            return listOfIds;
         }
 
         public async Task IncreaseCount(string jobPosting)

@@ -14,5 +14,7 @@
         Task IncreaseCount(string jobPosting);
 
         Task DeleteReport(string jobPostingId);
+
+        ICollection<string> GetAllReportedJobPostings();
     }
 }

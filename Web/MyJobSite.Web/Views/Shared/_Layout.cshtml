@@ -63,7 +63,7 @@
                             @if (User.IsInRole("Administrator"))
                             {
                                 <li>
-                                    <a  href="#"> Reported Job Postings</a>
+                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="BrowseReportedJobPostings"> Reported Job Postings</a>
                                 </li>
                                 <li>
                                     <a  href="#"> Reported Profiles</a>

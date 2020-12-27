@@ -98,5 +98,18 @@
 
             return listOfCandidateJobPostings;
         }
+
+        public ICollection<T> GetSomeJobpostingsInformation<T>(ICollection<string> ids)
+        {
+            var listOfJobPostings = new List<T>();
+
+            foreach (var id in ids)
+            {
+                var jobPosting = this.jobRepository.All().Where(j => j.Id == id).To<T>().FirstOrDefault();
+                listOfJobPostings.Add(jobPosting);
+            }
+
+            return listOfJobPostings;
+        }
     }
 }

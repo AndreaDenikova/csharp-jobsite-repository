@@ -88,7 +88,11 @@
                                 @if (companyInfoService.GetCompanyInfoUserId(Model.CompanyInfoId) != accountTypeSerice.GetUserId(User))
                                 {
                                     <button class="btn btn-outline-primary">Email Us</button>
-                                    <a asp-controller="JobPostings" asp-action="AddNewJobPostingReport" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Report</a>
+                                    @if (!User.IsInRole("Administrator"))
+                                    {
+                                        <a asp-controller="JobPostings" asp-action="AddNewJobPostingReport" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Report</a>
+                                    }
+
                                 }
                             </div>
                         </div>
