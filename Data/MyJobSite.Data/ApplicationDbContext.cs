@@ -39,6 +39,10 @@
 
         public DbSet<City> Cities { get; set; }
 
+        public DbSet<ReportedJobPosting> ReportedJobPostings { get; set; }
+
+        public DbSet<ReportedProfile> ReportedProfiles { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
