@@ -23,8 +23,10 @@
         private readonly ICitiesService citiesService;
         private readonly ICandidatesService candidatesService;
         private readonly IUserInfoService userInfoService;
+        private readonly IReportsProfileService reportsProfileService;
+        private readonly IReportsJobPostingService reportsJobPostingService;
 
-        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService, ICandidatesService candidatesService, IUserInfoService userInfoService)
+        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService, ICandidatesService candidatesService, IUserInfoService userInfoService, IReportsProfileService reportsProfileService, IReportsJobPostingService reportsJobPostingService)
         {
             this.jobPostingService = jobPostingService;
             this.userManager = userManager;
@@ -34,6 +36,8 @@
             this.citiesService = citiesService;
             this.candidatesService = candidatesService;
             this.userInfoService = userInfoService;
+            this.reportsProfileService = reportsProfileService;
+            this.reportsJobPostingService = reportsJobPostingService;
         }
 
         [Authorize]
@@ -154,6 +158,22 @@
             var viewModel = this.jobPostingService.GetCandidateAllJobPostingsInformation<BrowseJobPostingViewModel>(ids);
 
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> AddNewJobPostingReport(string id) //// id == jobPostingId
+        {
+            var checkIfAlreadyReported = this.reportsJobPostingService.CheckIfJobPostingAlreadyReported(id);
+
+            if (checkIfAlreadyReported == true)
+            {
+                await this.reportsJobPostingService.IncreaseCount(id);
+                return this.RedirectToAction("GetJobPosting", "JobPostings", new { id });
+            }
+
+            await this.reportsJobPostingService.AddNewReportedJobPosting(id);
+            return this.RedirectToAction("GetJobPosting", "JobPostings", new { id });
+
         }
     }
 }

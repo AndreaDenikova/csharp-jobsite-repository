@@ -71,7 +71,7 @@
                                 @if (companyInfoService.GetCompanyInfoUserId(Model.Id) != accountTypeSerice.GetUserId(User))
                                 {
                                     <button class="btn btn-outline-primary">Email Us</button>
-                                    <a href="#" class="btn btn-sm btn-danger">Report</a>
+                                    <a asp-controller="ProfileReports" asp-action="AddNewProfileReport" asp-route-id="@Model.UserId" class="btn btn-sm btn-danger">Report</a>
                                 }
                             </div>
                         </div>
