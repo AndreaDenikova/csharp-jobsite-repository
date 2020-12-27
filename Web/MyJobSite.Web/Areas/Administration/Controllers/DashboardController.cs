@@ -35,6 +35,12 @@
             return this.Redirect("/"); //// TODO: fix it to reload the page
         }
 
+        public async Task<IActionResult> DeleteJobPosting(string id) //// id == jobPostingId
+        {
+            await this.jobPostingsService.MarkJobPostingAsDeleted(id);
+            return this.Redirect("/"); //// TODO: fix it to reload the page
+        }
+
         public async Task<IActionResult> DeleteProfileReport(string id) //// id == userId
         {
             await this.reportsProfileService.DeleteReport(id);

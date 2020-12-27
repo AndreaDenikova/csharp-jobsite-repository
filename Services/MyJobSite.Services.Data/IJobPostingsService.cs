@@ -11,6 +11,8 @@
     {
         Task PostJobPostingAsync(JobPostingInputModel input);
 
+        Task MarkJobPostingAsDeleted(string jobPostingId);
+
         T GetJobPostingInformation<T>(string id);
 
         ICollection<T> GetCandidateAllJobPostingsInformation<T>(ICollection<string> ids); //// ids = jobPostingsIds

@@ -93,6 +93,10 @@
                                         <a asp-controller="JobPostings" asp-action="AddNewJobPostingReport" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Report</a>
                                     }
 
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <a asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteJobPosting" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Delete Job Posting</a>
+                                    }
                                 }
                             </div>
                         </div>

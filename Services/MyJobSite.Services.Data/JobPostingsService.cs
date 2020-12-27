@@ -111,5 +111,14 @@
 
             return listOfJobPostings;
         }
+
+        public async Task MarkJobPostingAsDeleted(string jobPostingId)
+        {
+            var jobPosting = this.jobRepository.All().Where(j => j.Id == jobPostingId).FirstOrDefault();
+            jobPosting.IsDeleted = true;
+
+            this.jobRepository.Update(jobPosting);
+            await this.jobRepository.SaveChangesAsync();
+        }
     }
 }
