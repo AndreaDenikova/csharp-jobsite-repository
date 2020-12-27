@@ -10,5 +10,9 @@
         Task AddNewReportedJobPosting(string jobPostingId);
 
         bool CheckIfJobPostingAlreadyReported(string jobPostingId);
+
+        Task IncreaseCount(string jobPosting);
+
+        Task DeleteReport(string jobPostingId);
     }
 }

@@ -1,13 +1,14 @@
-﻿using MyJobSite.Data.Common.Repositories;
-using MyJobSite.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyJobSite.Services.Data
+﻿namespace MyJobSite.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using MyJobSite.Data.Common.Repositories;
+    using MyJobSite.Data.Models;
+
     public class ReportsJobPostingService : IReportsJobPostingService
     {
         private readonly IDeletableEntityRepository<ReportedJobPosting> reportedJobPostingsRepository;
@@ -38,6 +39,26 @@ namespace MyJobSite.Services.Data
             }
 
             return true;
+        }
+
+        public async Task DeleteReport(string jobPostingId)
+        {
+            var report = this.reportedJobPostingsRepository.All().Where(r => r.JobPostingId == jobPostingId).FirstOrDefault();
+
+            this.reportedJobPostingsRepository.HardDelete(report);
+
+            await this.reportedJobPostingsRepository.SaveChangesAsync();
+        }
+
+        public async Task IncreaseCount(string jobPosting)
+        {
+            var report = this.reportedJobPostingsRepository.All().Where(r => r.JobPostingId == jobPosting).FirstOrDefault();
+
+            report.Count += 1;
+
+            this.reportedJobPostingsRepository.Update(report);
+
+            await this.reportedJobPostingsRepository.SaveChangesAsync();
         }
     }
 }
