@@ -19,14 +19,16 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserInfoService userInfoService;
         private readonly ICompanyInfoService companyInfoService;
+        private readonly IJobPostingsService jobPostingsService;
 
-        public CategoryController(ICategoriesService categoriesService, IAccountTypeService accountTypeService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService, ICompanyInfoService companyInfoService)
+        public CategoryController(ICategoriesService categoriesService, IAccountTypeService accountTypeService, UserManager<ApplicationUser> userManager, IUserInfoService userInfoService, ICompanyInfoService companyInfoService, IJobPostingsService jobPostingsService)
         {
             this.categoriesService = categoriesService;
             this.accountTypeService = accountTypeService;
             this.userManager = userManager;
             this.userInfoService = userInfoService;
             this.companyInfoService = companyInfoService;
+            this.jobPostingsService = jobPostingsService;
         }
 
         public IActionResult Categories()
@@ -55,6 +57,12 @@
             }
 
             var viewModel = this.categoriesService.GetCategories<CategoryViewModel>();
+
+            foreach (var model in viewModel)
+            {
+                model.JobPostringsCount = this.jobPostingsService.GetJobPostingsCount(model.Id);
+            }
+
             return this.View(viewModel);
         }
     }

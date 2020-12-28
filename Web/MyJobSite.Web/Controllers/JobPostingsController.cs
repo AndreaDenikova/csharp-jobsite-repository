@@ -182,7 +182,6 @@
 
             await this.reportsJobPostingService.AddNewReportedJobPosting(id);
             return this.RedirectToAction("GetJobPosting", "JobPostings", new { id });
-
         }
     }
 }

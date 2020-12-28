@@ -32,5 +32,7 @@
         Task MarkJobPostingsAsDeleted(ICollection<string> ids);
 
         bool CheckIfIsDeleted(string jobPostingId);
+
+        int GetJobPostingsCount(string categoryId);
     }
 }

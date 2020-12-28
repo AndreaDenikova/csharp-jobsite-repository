@@ -161,5 +161,11 @@
             }
             return false;
         }
+
+        public int GetJobPostingsCount(string categoryId)
+        {
+            var jobPostingsCount = this.jobRepository.All().Where(j => j.JobPostingCategoryId == categoryId).ToList().Count();
+            return jobPostingsCount;
+        }
     }
 }
