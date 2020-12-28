@@ -16,6 +16,10 @@
 
         public string UserId { get; set; }
 
+        public ApplicationUser User { get; set; }
+
+        public string UserName { get; set; }
+
         public string Description { get; set; }
 
         public string ProfilePicture { get; set; }

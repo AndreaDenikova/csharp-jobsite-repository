@@ -124,7 +124,8 @@
                                                             }
                                                         </div>
                                                     </div>
-                                                    <a asp-controller="FavoriteJobPostings" asp-action="RemoveFavoriteJobPosting" asp-route-id="@jobPosting.Id" class="btn btn-primary btn-danger">Remove</a>
+                                                    <a hidden="hidden" id="remove" asp-controller="FavoriteJobPostings" asp-action="RemoveFavoriteJobPosting" asp-route-id="@jobPosting.Id" class="btn btn-primary btn-danger">Remove</a>
+                                                    <button class="btn btn-primary btn-danger" onclick="document.getElementById('remove').click()">Remove</button>
                                                 </a>
                                             </li>
                                         }
@@ -139,18 +140,12 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-xl-3 col-lg-4">
+                                @*<div class="col-xl-3 col-lg-4">
                                     <div class="sticky-top">
-                                        @*<div class="clearfix m-b30">
-                                                <h5 class="widget-title font-weight-700 text-uppercase">Keywords</h5>
-                                                <div class="">
-                                                    <input type="text" class="form-control" placeholder="Search">
-                                                </div>
-                                            </div>*@
                                         <div class="clearfix m-b10">
                                             <div class="form-group">
                                                 <label for="exampleFormControlSelect1">City</label>
-                                                <select @*asp-for="CityName"*@ class="form-control" id="category">
+                                                <select class="form-control" id="category">
                                                     @foreach (var city in @citiesService.GetCities())
                                                     {
                                                         <option value="@city">@city</option>
@@ -188,7 +183,7 @@
                                         <hr>
                                         <a href="#" class="btn btn-primary btn-primary"><span class="none"></span> Filter</a>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>
