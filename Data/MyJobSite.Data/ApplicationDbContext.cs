@@ -41,7 +41,9 @@
 
         public DbSet<ReportedJobPosting> ReportedJobPostings { get; set; }
 
-        public DbSet<ReportedProfile> ReportedProfiles { get; set; }
+        public DbSet<ReportedCandidateProfile> ReportedCandidateProfiles { get; set; }
+
+        public DbSet<ReportedCompanyProfile> ReportedCompanyProfiles { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

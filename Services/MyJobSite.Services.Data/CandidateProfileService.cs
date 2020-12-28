@@ -46,5 +46,17 @@
 
             return listOfCandidates;
         }
+
+        public bool CheckIfProfileDeleted(string userId)
+        {
+            var profile = this.userInfoRepository.AllWithDeleted().Where(p => p.UserId == userId).FirstOrDefault();
+
+            if (profile.IsDeleted == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

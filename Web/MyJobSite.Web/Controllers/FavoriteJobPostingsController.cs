@@ -69,7 +69,19 @@
                 return this.RedirectToAction("UserInfo", "UserInfo");
             }
 
-            var jobPostingsIds = this.candidateFavoriteJobPostingsService.GetAllFavoriteJobPostingsIds(userId);
+            var jobPostingsIds = this.candidateFavoriteJobPostingsService.GetAllFavoriteJobPostingsIds(userId).ToList();
+
+            for (int i = 0; i < jobPostingsIds.Count; i++)
+            {
+                var checkIfDeleted = this.jobPostingsService.CheckIfIsDeleted(jobPostingsIds[i]);
+
+                if (checkIfDeleted == true)
+                {
+                    jobPostingsIds.Remove(jobPostingsIds[i]);
+                    i--;
+                }
+            }
+
             var viewModel = this.jobPostingsService.GetCandidateAllJobPostingsInformation<BrowseJobPostingViewModel>(jobPostingsIds);
 
             return this.View(viewModel);

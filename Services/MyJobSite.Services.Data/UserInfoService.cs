@@ -95,5 +95,14 @@
 
             return true;
         }
+
+        public async Task MarkUserInfoAsDeleted(string userId)
+        {
+            var userInfo = this.userInfoRepository.All().Where(u => u.UserId == userId).FirstOrDefault();
+
+            this.userInfoRepository.Delete(userInfo);
+
+            await this.userInfoRepository.SaveChangesAsync();
+        }
     }
 }

@@ -43,5 +43,14 @@
             string userId = user.Id;
             return userId;
         }
+
+        public async Task MarkProfileAsDeleted(string id)
+        {
+            var profile = this.applicationUser.All().Where(u => u.Id == id).FirstOrDefault();
+
+            this.applicationUser.Delete(profile);
+
+            await this.applicationUser.SaveChangesAsync();
+        }
     }
 }

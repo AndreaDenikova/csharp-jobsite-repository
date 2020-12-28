@@ -19,5 +19,7 @@
         string GetUserInfoUserId(string userInfoId);
 
         bool CheckIfHasInformation(string userId);
+
+        Task MarkUserInfoAsDeleted(string userId);
     }
 }

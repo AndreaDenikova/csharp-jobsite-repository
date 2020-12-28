@@ -120,5 +120,46 @@
             this.jobRepository.Update(jobPosting);
             await this.jobRepository.SaveChangesAsync();
         }
+
+        public ICollection<string> GetAllJobPostingsByUserId(string companyInfoid)
+        {
+            var jb = this.jobRepository.All().Where(j => j.CompanyInfoId == companyInfoid).ToList();
+
+            var listOdIds = new List<string>();
+
+            foreach (var jobRepository in jb)
+            {
+                var id = jobRepository.Id;
+
+                if (!listOdIds.Contains(id))
+                {
+                    listOdIds.Add(id);
+                }
+            }
+
+            return listOdIds;
+        }
+
+        public async Task MarkJobPostingsAsDeleted(ICollection<string> ids)
+        {
+            foreach (var id in ids)
+            {
+                var jobPosting = this.jobRepository.All().Where(j => j.Id == id).FirstOrDefault();
+                this.jobRepository.Delete(jobPosting);
+
+                await this.jobRepository.SaveChangesAsync();
+            }
+        }
+
+        public bool CheckIfIsDeleted(string jobPostingId)
+        {
+            var jobPosting = this.jobRepository.AllWithDeleted().Where(j => j.Id == jobPostingId).FirstOrDefault();
+
+            if (jobPosting.IsDeleted == true)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

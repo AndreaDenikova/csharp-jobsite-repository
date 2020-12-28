@@ -29,5 +29,7 @@
         string GetCompanyInfoUserId(string companyInfoId);
 
         bool CheckIfHasInformation(string userId);
+
+        Task MarkCompanyInfoAsDeleted(string userId);
     }
 }

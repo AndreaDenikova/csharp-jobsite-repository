@@ -15,6 +15,6 @@
 
         Task DeleteReport(string jobPostingId);
 
-        ICollection<string> GetAllReportedJobPostings();
+        ICollection<string> GetAllReportedJobPostingsIds();
     }
 }

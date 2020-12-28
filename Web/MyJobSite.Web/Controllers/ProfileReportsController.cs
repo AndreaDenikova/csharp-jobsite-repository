@@ -10,40 +10,52 @@ namespace MyJobSite.Web.Controllers
 {
     public class ProfileReportsController : BaseController
     {
-        private readonly IReportsProfileService reportsProfileService;
         private readonly IAccountTypeService accountTypeService;
+        private readonly IReportsCompanyProfileService reportsCompanyProfileService;
+        private readonly IReportsCandidateProfileService reportsCandidateProfileService;
+        private readonly ICompanyInfoService companyInfoService;
 
-        public ProfileReportsController(IReportsProfileService reportsProfileService, IAccountTypeService accountTypeService)
+        public ProfileReportsController(IAccountTypeService accountTypeService, IReportsCompanyProfileService reportsCompanyProfileService, IReportsCandidateProfileService reportsCandidateProfileService, ICompanyInfoService companyInfoService)
         {
-            this.reportsProfileService = reportsProfileService;
             this.accountTypeService = accountTypeService;
+            this.reportsCompanyProfileService = reportsCompanyProfileService;
+            this.reportsCandidateProfileService = reportsCandidateProfileService;
+            this.companyInfoService = companyInfoService;
         }
 
         [Authorize]
-        public async Task<IActionResult> AddNewProfileReport(string id) //// id == userId
+        public async Task<IActionResult> AddNewCompanyProfileReport(string id) //// id == userId
         {
-            var checkIfAlreadyReported = this.reportsProfileService.CheckIfProfileAlreadyReported(id);
-            var accounType = this.accountTypeService.GetAccountTypeController(id);
+            var checkIfAlreadyReported = this.reportsCompanyProfileService.CheckIfProfileAlreadyReported(id);
+
+            var companyInfoId = this.companyInfoService.GetCompanyInfoId(id);
 
             if (checkIfAlreadyReported == true)
             {
-                await this.reportsProfileService.IncreaseCount(id);
 
-                if (accounType == "Candidate")
-                {
-                    return this.RedirectToAction("CandidateProfile", "CandidateProfile", new { id });
-                }
+                await this.reportsCompanyProfileService.IncreaseCount(id);
 
-                return this.RedirectToAction("CompanyProfile", "CompanyProfile", new { id });
+                return this.RedirectToAction("CompanyProfile", "CompanyProfile", new { id = companyInfoId });
             }
 
-            await this.reportsProfileService.AddNewReportedProfile(id);
-            if (accounType == "Candidate")
+            await this.reportsCompanyProfileService.AddNewReportedProfile(id);
+            return this.RedirectToAction("CompanyProfile", "CompanyProfile", new { id = companyInfoId });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> AddNewCandidateProfileReport(string id) //// id == userId
+        {
+            var checkIfAlreadyReported = this.reportsCandidateProfileService.CheckIfProfileAlreadyReported(id);
+
+            if (checkIfAlreadyReported == true)
             {
+                await this.reportsCandidateProfileService.IncreaseCount(id);
+
                 return this.RedirectToAction("CandidateProfile", "CandidateProfile", new { id });
             }
 
-            return this.RedirectToAction("CompanyProfile", "CompanyProfile");
+            await this.reportsCandidateProfileService.AddNewReportedProfile(id);
+            return this.RedirectToAction("CandidateProfile", "CandidateProfile", new { id });
         }
     }
 }

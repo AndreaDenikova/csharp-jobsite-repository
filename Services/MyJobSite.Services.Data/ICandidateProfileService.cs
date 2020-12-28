@@ -13,5 +13,7 @@
         T GetCandidateProfileInformationByUserId<T>(string id);
 
         ICollection<T> GetCandidatesProfileInfoByUserIds<T>(ICollection<string> ids);
+
+        bool CheckIfProfileDeleted(string userId);
     }
 }

@@ -51,7 +51,7 @@
             await this.reportedJobPostingsRepository.SaveChangesAsync();
         }
 
-        public ICollection<string> GetAllReportedJobPostings()
+        public ICollection<string> GetAllReportedJobPostingsIds()
         {
             var jobPostings = this.reportedJobPostingsRepository.All().ToList();
 

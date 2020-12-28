@@ -123,5 +123,14 @@
 
             return userId;
         }
+
+        public async Task MarkCompanyInfoAsDeleted(string userId)
+        {
+            var companyInfo = this.companyInfoRepository.All().Where(u => u.UserId == userId).FirstOrDefault();
+
+            this.companyInfoRepository.Delete(companyInfo);
+
+            await this.companyInfoRepository.SaveChangesAsync();
+        }
     }
 }

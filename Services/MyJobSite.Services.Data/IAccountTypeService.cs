@@ -13,5 +13,7 @@
         string GetUserId(ClaimsPrincipal claimsPrincipal);
 
         string GetAccountTypeController(string userId);
+
+        Task MarkProfileAsDeleted(string id);
     }
 }

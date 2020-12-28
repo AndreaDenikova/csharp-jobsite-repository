@@ -26,5 +26,11 @@
         string GetJobPostingId(string id);
 
         string GetCompanyInfoId(string jobPostingId);
+
+        ICollection<string> GetAllJobPostingsByUserId(string companyInfoId);
+
+        Task MarkJobPostingsAsDeleted(ICollection<string> ids);
+
+        bool CheckIfIsDeleted(string jobPostingId);
     }
 }

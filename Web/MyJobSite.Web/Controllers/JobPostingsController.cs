@@ -23,10 +23,9 @@
         private readonly ICitiesService citiesService;
         private readonly ICandidatesService candidatesService;
         private readonly IUserInfoService userInfoService;
-        private readonly IReportsProfileService reportsProfileService;
         private readonly IReportsJobPostingService reportsJobPostingService;
 
-        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService, ICandidatesService candidatesService, IUserInfoService userInfoService, IReportsProfileService reportsProfileService, IReportsJobPostingService reportsJobPostingService)
+        public JobPostingsController(IJobPostingsService jobPostingService, UserManager<ApplicationUser> userManager, IAccountTypeService accountTypeService, ICategoriesService categoriesService, ICompanyInfoService companyInfoService, ICitiesService citiesService, ICandidatesService candidatesService, IUserInfoService userInfoService, IReportsJobPostingService reportsJobPostingService)
         {
             this.jobPostingService = jobPostingService;
             this.userManager = userManager;
@@ -36,7 +35,6 @@
             this.citiesService = citiesService;
             this.candidatesService = candidatesService;
             this.userInfoService = userInfoService;
-            this.reportsProfileService = reportsProfileService;
             this.reportsJobPostingService = reportsJobPostingService;
         }
 
@@ -148,11 +146,22 @@
                 return this.RedirectToAction("UserInfo", "UserInfo");
             }
 
-            var ids = this.candidatesService.GetAllJobPostingsIds(userId);
+            var ids = this.candidatesService.GetAllJobPostingsIds(userId).ToList();
 
-            if (ids == null)
+            if (!ids.Any())
             {
                 return this.RedirectToAction("GetNoApplyingsForJobPosting", "MessagesToUsers");
+            }
+
+            for (int i = 0; i < ids.Count; i++)
+            {
+                var checkIfDeleted = this.jobPostingService.CheckIfIsDeleted(ids[i]);
+
+                if (checkIfDeleted == true)
+                {
+                    ids.Remove(ids[i]);
+                    i--;
+                }
             }
 
             var viewModel = this.jobPostingService.GetCandidateAllJobPostingsInformation<BrowseJobPostingViewModel>(ids);

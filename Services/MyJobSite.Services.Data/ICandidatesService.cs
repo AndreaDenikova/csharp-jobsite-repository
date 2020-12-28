@@ -16,5 +16,7 @@
         ICollection<string> GetAllUsersIdOfJobPosting(string jobPostingId);
 
         ICollection<string> GetAllJobPostingsIds(string userId); //// userId = candidateId
+
+        Task MarkAllApplyingsAsDeleted(string userId);
     }
 }

@@ -83,5 +83,17 @@
 
             return listOfUserIds;
         }
+
+        public async Task MarkAllApplyingsAsDeleted(string userId)
+        {
+            var applyings = this.candidateRepository.All().Where(a => a.UserId == userId).ToList();
+
+            foreach (var applying in applyings)
+            {
+                this.candidateRepository.Delete(applying);
+
+                await this.candidateRepository.SaveChangesAsync();
+            }
+        }
     }
 }
