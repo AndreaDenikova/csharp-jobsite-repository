@@ -37,18 +37,21 @@
 
             if (accountType == "Company")
             {
-                return this.Redirect("/"); //// TODO: Change this Redirect with Message
+                var message1 = "Companies cannot add job posting as favorites!";
+                return this.RedirectToAction("Message", "MessagesToUsers", new { message1 }); 
             }
 
             var checkIfJobApplicationAlreadyAdded = this.candidateFavoriteJobPostingsService.CheckIfFavoriteJobPostingAlreadyExists(userId, id);
 
             if (checkIfJobApplicationAlreadyAdded == true)
             {
-                return this.Redirect("/"); //// TODO: Change this Redirect with Message
+                var message2 = "Job posting already added to favorites!";
+                return this.RedirectToAction("Message", "MessagesToUsers", new { message2 });
             }
 
             await this.candidateFavoriteJobPostingsService.AddNewCandidatesFavoriteJobPosting(userId, id);
-            return this.Redirect("/"); //// TODO: Change this Redirect with Message
+            var message = "Successfully added to favorites!";
+            return this.RedirectToAction("Message", "MessagesToUsers", new { message });
         }
 
         [Authorize]

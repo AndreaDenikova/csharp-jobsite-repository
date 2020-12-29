@@ -21,7 +21,7 @@
 
         public bool CheckIfCandidateAlreadyApplied(string userId, string jobPostingId)
         {
-            var candidate = this.candidateRepository.All().Where(c => c.UserId == userId && c.JobPostingId == jobPostingId).FirstOrDefault();
+            var candidate = this.candidateRepository.AllWithDeleted().Where(c => c.UserId == userId && c.JobPostingId == jobPostingId).FirstOrDefault();
 
             if (candidate == null)
             {
@@ -94,6 +94,15 @@
 
                 await this.candidateRepository.SaveChangesAsync();
             }
+        }
+
+        public async Task MarkApplyingAsDeleted(string userId, string jobPostingId)
+        {
+            var applying = this.candidateRepository.All().Where(c => c.UserId == userId && c.JobPostingId == jobPostingId).FirstOrDefault();
+
+            this.candidateRepository.Delete(applying);
+
+            await this.candidateRepository.SaveChangesAsync();
         }
     }
 }

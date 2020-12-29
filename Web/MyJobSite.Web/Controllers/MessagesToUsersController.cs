@@ -7,6 +7,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MyJobSite.Web.ViewModels.ViewModels.Message;
 
     public class MessagesToUsersController : BaseController
     {
@@ -14,6 +15,17 @@
         public IActionResult AlreadyAppliedForJobPosting()
         {
             return this.View();
+        }
+
+        [Authorize]
+        public IActionResult Message(string message)
+        {
+            var viewModel = new Messages
+            {
+                Message = message,
+            };
+
+            return this.View(viewModel);
         }
     }
 }

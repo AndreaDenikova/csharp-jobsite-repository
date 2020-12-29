@@ -71,6 +71,11 @@
             var ids = this.candidatesService.GetAllUsersIdOfJobPosting(id);
             var viewModel = this.candidateProfileService.GetCandidatesProfileInfoByUserIds<BrowseCandidatesViewModel>(ids);
 
+            foreach (var candidate in viewModel)
+            {
+                candidate.JobPostingId = id;
+            }
+
             return this.View(viewModel);
         }
     }

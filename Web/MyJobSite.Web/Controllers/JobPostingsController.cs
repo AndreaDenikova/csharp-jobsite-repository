@@ -61,8 +61,6 @@
                 return this.RedirectToAction("JobPostings");
             }
 
-            //// TODO: Fix the check
-
             if (!this.ModelState.IsValid)
             {
                 return this.View();
@@ -182,6 +180,14 @@
 
             await this.reportsJobPostingService.AddNewReportedJobPosting(id);
             return this.RedirectToAction("GetJobPosting", "JobPostings", new { id });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> RemoveCandidateFromJobPosting(string candidateId, string id) //// id == jobPostingId
+        {
+            await this.candidatesService.MarkApplyingAsDeleted(candidateId, id);
+
+            return this.RedirectToAction("BrowseCandidates", "CandidateProfile", new { id });
         }
     }
 }
