@@ -96,6 +96,17 @@
             }
         }
 
+        public async Task MarkAllApplyingsAsDeletedByJobPostingId(string jobPostingId)
+        {
+            var applyings = this.candidateRepository.All().Where(a => a.JobPostingId == jobPostingId).ToList();
+
+            foreach (var applying in applyings)
+            {
+                this.candidateRepository.Delete(applying);
+                await this.candidateRepository.SaveChangesAsync();
+            }
+        }
+
         public async Task MarkApplyingAsDeleted(string userId, string jobPostingId)
         {
             var applying = this.candidateRepository.All().Where(c => c.UserId == userId && c.JobPostingId == jobPostingId).FirstOrDefault();

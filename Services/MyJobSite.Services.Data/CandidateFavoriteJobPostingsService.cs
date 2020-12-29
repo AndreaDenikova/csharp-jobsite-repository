@@ -51,6 +51,18 @@
             await this.favoriteJobPostingRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteJobPostingFromFavoritesByJobPostingId(string jobPostingId)
+        {
+            var favorites = this.favoriteJobPostingRepository.All().Where(f => f.JobPostingId == jobPostingId).ToList();
+
+            foreach (var favorite in favorites)
+            {
+                this.favoriteJobPostingRepository.Delete(favorite);
+
+                await this.favoriteJobPostingRepository.SaveChangesAsync();
+            }
+        }
+
         public ICollection<string> GetAllFavoriteJobPostingsIds(string userId)
         {
             var favorites = this.favoriteJobPostingRepository.All().Where(f => f.UserId == userId).ToList();

@@ -148,7 +148,8 @@
 
             if (!ids.Any())
             {
-                return this.RedirectToAction("GetNoApplyingsForJobPosting", "MessagesToUsers");
+                var message = "No applyings yet";
+                return this.RedirectToAction("Message", "MessagesToUsers", new { message });
             }
 
             for (int i = 0; i < ids.Count; i++)

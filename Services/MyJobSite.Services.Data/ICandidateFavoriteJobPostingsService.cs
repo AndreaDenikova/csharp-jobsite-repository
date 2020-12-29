@@ -11,6 +11,8 @@
 
         Task DeleteJobPostingFromFavorites(string userid, string jobPostingId);
 
+        Task DeleteJobPostingFromFavoritesByJobPostingId(string jobPostingId);
+
         bool CheckIfFavoriteJobPostingAlreadyExists(string userId, string jobPostingId);
 
         ICollection<string> GetAllFavoriteJobPostingsIds(string userId);

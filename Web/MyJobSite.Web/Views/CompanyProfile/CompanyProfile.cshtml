@@ -70,7 +70,9 @@
                                 <h4>Microsoft</h4>
                                 @if (companyInfoService.GetCompanyInfoUserId(Model.Id) != accountTypeSerice.GetUserId(User))
                                 {
-                                    <button class="btn btn-outline-primary">Email Us</button>
+
+                                    <a hidden="hidden" id="mail" href="mailto:@Model.Email">Message</a>
+                                    <button onclick="document.getElementById('mail').click()" class="btn btn-outline-primary">Message</button>
                                     @if (!User.IsInRole("Administrator"))
                                     {
                                         <a asp-controller="ProfileReports" asp-action="AddNewCompanyProfileReport" asp-route-id="@Model.UserId" class="btn btn-sm btn-danger">Report</a>

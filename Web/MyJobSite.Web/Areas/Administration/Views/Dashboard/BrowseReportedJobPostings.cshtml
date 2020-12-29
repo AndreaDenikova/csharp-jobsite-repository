@@ -98,7 +98,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex">
+                                                    @*<div class="d-flex">*@
                                                         <div class="job-time mr-auto">
                                                             <span>@jobPosting.CityName</span>
                                                         </div>
@@ -123,8 +123,9 @@
                                                                 <span>Minimum Salary: $@jobPosting.MinSalary</span>
                                                             }
                                                         </div>
-                                                        <a asp-controller="Dashboard" asp-action="DeleteJobPostingReport" asp-route-id="@jobPosting.Id" class="btn btn-primary btn-danger">Delete Report</a>
-                                                    </div>
+                                                        <a hidden="hidden" id="removeReport" asp-controller="Dashboard" asp-action="DeleteJobPostingReport" asp-route-id="@jobPosting.Id" class="btn btn-primary btn-danger">Delete Report</a>
+                                                        <button class="btn btn-primary btn-danger" onclick="document.getElementById('removeReport').click()" >Delete Report</button>
+                                                    @*</div>*@
                                                 </a>
                                             </li>
                                         }

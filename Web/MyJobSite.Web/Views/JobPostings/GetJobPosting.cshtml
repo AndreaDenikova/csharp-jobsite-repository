@@ -87,7 +87,6 @@
                                 <p class="text-muted font-size-sm">Address: @Model.Address</p>
                                 @if (companyInfoService.GetCompanyInfoUserId(Model.CompanyInfoId) != accountTypeSerice.GetUserId(User))
                                 {
-                                    <button class="btn btn-outline-primary">Email Us</button>
                                     @if (!User.IsInRole("Administrator"))
                                     {
                                         <a asp-controller="JobPostings" asp-action="AddNewJobPostingReport" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Report</a>

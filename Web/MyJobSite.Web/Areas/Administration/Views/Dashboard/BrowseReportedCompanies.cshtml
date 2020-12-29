@@ -100,8 +100,12 @@
                                                         </div>
                                                     </div>
                                                     <hr>
-                                                    <a type="button" class="btn btn-primary btn-sm" asp-area="" asp-controller="CompanyProfile" asp-action="CompanyProfile" asp-route-id="@company.Id">View Profile</a>
-                                                    <a type="button" class="btn btn-primary btn-sm btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteCompanyProfileReport" asp-route-id="@company.UserId">Remove Company</a>
+                                                    <a type="button" hidden="hidden" id="view" class="btn btn-primary btn-sm" asp-area="" asp-controller="CompanyProfile" asp-action="CompanyProfile" asp-route-id="@company.Id">View Profile</a>
+                                                    <button class="btn btn-primary btn-sm" onclick="document.getElementById('view').click()">View Profile</button>
+                                                    <a type="button" hidden="hidden" id="removeReport" class="btn btn-primary btn-sm btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteCompanyProfileReport" asp-route-id="@company.UserId">Remove Report</a>
+                                                    <button class="btn btn-primary btn-sm btn-danger" onclick="document.getElementById('removeReport').click()">Remove Report</button>
+                                                    <a type="button" hidden="hidden" id="removeProfile" class="btn btn-primary btn-sm btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteCompanyProfile" asp-route-id="@company.UserId">Remove Company</a>
+                                                    <button class="btn btn-primary btn-sm btn-danger" onclick="document.getElementById('removeProfile').click()">Delete Profile</button>
                                                     <hr>
                                                 </div>
                                             </li>

@@ -19,6 +19,8 @@
 
         Task MarkAllApplyingsAsDeleted(string userId);
 
+        Task MarkAllApplyingsAsDeletedByJobPostingId(string jobPostingId);
+
         Task MarkApplyingAsDeleted(string userId, string jobPostingId);
     }
 }

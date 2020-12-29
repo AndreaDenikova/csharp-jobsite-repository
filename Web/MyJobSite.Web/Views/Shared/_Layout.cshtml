@@ -58,7 +58,7 @@
                     <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <a asp-controller="Home" asp-action="Index">Home</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             @if (User.IsInRole("Administrator"))
                             {
@@ -66,10 +66,10 @@
                                     <a asp-area="Administration" asp-controller="Dashboard" asp-action="BrowseReportedJobPostings"> Reported Job Postings</a>
                                 </li>
                                 <li>
-                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="BrowseReportedCandidates"> Reported Candidate Profiles</a>
+                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="BrowseReportedCandidates"> Reported Candidates</a>
                                 </li>
                                 <li>
-                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="BrowseReportedCompanies"> Reported Company Profiles</a>
+                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="BrowseReportedCompanies"> Reported Companies</a>
                                 </li>
                             }
                             else if (User.Identity.IsAuthenticated)

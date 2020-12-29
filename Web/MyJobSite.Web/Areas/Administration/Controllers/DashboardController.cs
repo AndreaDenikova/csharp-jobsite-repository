@@ -24,8 +24,9 @@
         private readonly ICandidatesService candidatesService;
         private readonly IAccountTypeService accountTypeService;
         private readonly ICandidateProfileService candidateProfileService;
+        private readonly ICandidateFavoriteJobPostingsService favoriteJobPostingsService;
 
-        public DashboardController(ISettingsService settingsService, IReportsJobPostingService reportsJobPostingService, IReportsCompanyProfileService reportsCompanyProfileService, ICompanyProfileService companyProfileService, IReportsCandidateProfileService reportsCandidateProfileService, ICompanyInfoService companyInfoService, IJobPostingsService jobPostingsService, IUserInfoService userInfoService, ICandidatesService candidatesService, IAccountTypeService accountTypeService, ICandidateProfileService candidateProfileService)
+        public DashboardController(ISettingsService settingsService, IReportsJobPostingService reportsJobPostingService, IReportsCompanyProfileService reportsCompanyProfileService, ICompanyProfileService companyProfileService, IReportsCandidateProfileService reportsCandidateProfileService, ICompanyInfoService companyInfoService, IJobPostingsService jobPostingsService, IUserInfoService userInfoService, ICandidatesService candidatesService, IAccountTypeService accountTypeService, ICandidateProfileService candidateProfileService, ICandidateFavoriteJobPostingsService favoriteJobPostingsService)
         {
             this.settingsService = settingsService;
             this.reportsJobPostingService = reportsJobPostingService;
@@ -38,6 +39,7 @@
             this.candidatesService = candidatesService;
             this.accountTypeService = accountTypeService;
             this.candidateProfileService = candidateProfileService;
+            this.favoriteJobPostingsService = favoriteJobPostingsService;
         }
 
         public IActionResult Index()
@@ -52,8 +54,12 @@
             return this.Redirect("/"); //// TODO: fix it to reload the page
         }
 
-        public async Task<IActionResult> DeleteJobPosting(string id) //// id == jobPostingId
+        public async Task<IActionResult> DeleteJobPosting(string id) //// id == userId
         {
+            await this.candidatesService.MarkAllApplyingsAsDeletedByJobPostingId(id);
+
+            await this.favoriteJobPostingsService.DeleteJobPostingFromFavoritesByJobPostingId(id);
+
             await this.jobPostingsService.MarkJobPostingAsDeleted(id);
             return this.Redirect("/"); //// TODO: fix it to reload the page
         }
@@ -70,7 +76,7 @@
             return this.Redirect("/"); //// TODO: fix it to reload the page
         }
 
-        public async Task<IActionResult> DeleteCompanyProfile(string id) //// id == jobPostingId
+        public async Task<IActionResult> DeleteCompanyProfile(string id) //// id == userId
         {
             await this.companyInfoService.MarkCompanyInfoAsDeleted(id);
 
